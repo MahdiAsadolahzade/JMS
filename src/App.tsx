@@ -5,9 +5,6 @@ function App() {
   return (
     <>
     <Navbar></Navbar>
-      <div className='text-green-900'>
-        hello world
-      </div>
     </>
   )
 }

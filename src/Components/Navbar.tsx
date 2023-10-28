@@ -2,15 +2,25 @@ import React, { useState } from 'react';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const handleLanguageChange = (language: string) => {
+    setSelectedLanguage(language);
+  };
+
   return (
-    <nav className="bg-blue-500 p-4">
+    <nav className={`bg-${isDarkMode ? 'gray-900' : 'blue-500'} p-4`}>
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white text-2xl font-bold">JMS</div>
+        <div className={`text-white text-2xl font-bold`}>JMS</div>
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
@@ -42,18 +52,42 @@ const Navbar: React.FC = () => {
           </button>
         </div>
         <div className="hidden md:flex space-x-4">
-          <a href="#" className="text-white">Home</a>
-          <a href="#" className="text-white">Journals</a>
-          <a href="#" className="text-white">About</a>
-          <a href="#" className="text-white">Contact</a>
+          <a href="#" className={`text-white`}>Home</a>
+          <a href="#" className={`text-white`}>About</a>
+          <a href="#" className={`text-white`}>Contact</a>
+        </div>
+        <div className="hidden md:flex space-x-4">
+          <button onClick={toggleDarkMode} className="text-white">
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
+          <select
+            value={selectedLanguage}
+            onChange={(e) => handleLanguageChange(e.target.value)}
+            className="text-white bg-transparent border-b-2 border-white focus:outline-none"
+          >
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+          </select>
         </div>
       </div>
       {isOpen && (
         <div className="md:hidden">
-          <a href="#" className="block text-white p-2">Home</a>
-          <a href="#" className="block text-white p-2">Journals</a>
-          <a href="#" className="block text-white p-2">About</a>
-          <a href="#" className="block text-white p-2">Contact</a>
+          <a href="#" className={`block text-white p-2`}>Home</a>
+          <a href="#" className={`block text-white p-2`}>About</a>
+          <a href="#" className={`block text-white p-2`}>Contact</a>
+          <button onClick={toggleDarkMode} className="block text-white p-2">
+            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          </button>
+          <select
+            value={selectedLanguage}
+            onChange={(e) => handleLanguageChange(e.target.value)}
+            className="block text-white bg-transparent border-b-2 border-white focus:outline-none p-2"
+          >
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+          </select>
         </div>
       )}
     </nav>
