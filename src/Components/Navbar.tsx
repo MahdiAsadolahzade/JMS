@@ -1,95 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useUserStore } from "../userStore";
+import { useAppStore } from "../appStore";
+import Theme from "./Theme/Theme";
+import LanguageSelect from "./Language/LanguageSelect";
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const { user, signOut } = useUserStore();
+  const { darkMode, toggleDarkMode, language, setLanguage } = useAppStore();
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  const handleLanguageChange = (language: string) => {
-    setSelectedLanguage(language);
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className={`bg-${isDarkMode ? 'gray-900' : 'blue-500'} p-4`}>
+    <nav
+      className={`${
+        darkMode ? "bg-gray-900" : "bg-blue-500"
+      } p-4 text-white`}
+    >
       <div className="container mx-auto flex justify-between items-center">
-        <div className={`text-white text-2xl font-bold`}>JMS</div>
+        <div className="text-2xl font-bold cursor-pointer">
+          <Link to="/">JMS</Link>
+        </div>
         <div className="md:hidden">
           <button
-            onClick={toggleMenu}
-            className="text-white focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-white hover:text-gray-300 focus:outline-none"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            <i className="fas fa-bars"></i>
           </button>
         </div>
-        <div className="hidden md:flex space-x-4">
-          <a href="#" className={`text-white`}>Home</a>
-          <a href="#" className={`text-white`}>About</a>
-          <a href="#" className={`text-white`}>Contact</a>
-        </div>
-        <div className="hidden md:flex space-x-4">
-          <button onClick={toggleDarkMode} className="text-white">
-            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
-          <select
-            value={selectedLanguage}
-            onChange={(e) => handleLanguageChange(e.target.value)}
-            className="text-white bg-transparent border-b-2 border-white focus:outline-none"
-          >
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
-          </select>
-        </div>
+        <ul
+          className={`${
+            menuOpen ? "block" : "hidden"
+          } md:flex space-x-4 md:space-x-8`}
+        >
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+          {user ? (
+            <>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <button
+                  onClick={signOut}
+                  className="hover:underline text-blue-400"
+                >
+                  Sign Out
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/register">Register</Link>
+              </li>
+            </>
+          )}
+          <li>
+            <Theme></Theme>
+          </li>
+          <li>
+            <LanguageSelect />
+          </li>
+        </ul>
       </div>
-      {isOpen && (
-        <div className="md:hidden">
-          <a href="#" className={`block text-white p-2`}>Home</a>
-          <a href="#" className={`block text-white p-2`}>About</a>
-          <a href="#" className={`block text-white p-2`}>Contact</a>
-          <button onClick={toggleDarkMode} className="block text-white p-2">
-            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-          </button>
-          <select
-            value={selectedLanguage}
-            onChange={(e) => handleLanguageChange(e.target.value)}
-            className="block text-white bg-transparent border-b-2 border-white focus:outline-none p-2"
-          >
-            <option value="English">English</option>
-            <option value="Spanish">Spanish</option>
-            <option value="French">French</option>
-          </select>
-        </div>
-      )}
     </nav>
   );
 };
