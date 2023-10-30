@@ -1,26 +1,32 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './Components/Navbar';
-import Home from './Components/Home';
-import About from './Components/About';
-import Contact from './Components/Contact';
-import Dashboard from './Components/Dashboard';
-import Login from './Components/login';
-import Register from './Components/Register';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home";
+import About from "./Components/About";
+import Contact from "./Components/Contact";
+import Dashboard from "./Components/Dashboard";
+import Login from "./Components/login";
+import Register from "./Components/Register";
+import { useAppStore } from "./appStore";
 
 const App: React.FC = () => {
+  const { language } = useAppStore();
   return (
-    <Router>
+  <Router>
+    <div className={`app-container ${language === 'Farsi' ? 'rtl' : 'ltr'}`}>
       <Navbar />
       <Routes>
-        <Route path="/"  Component={Home} />
+        <Route path="/" Component={Home} />
         <Route path="/about" Component={About} />
         <Route path="/contact" Component={Contact} />
         <Route path="/dashboard" Component={Dashboard} />
         <Route path="/login" Component={Login} />
         <Route path="/register" Component={Register} />
       </Routes>
+      </div>
+      
     </Router>
+    
   );
 };
 

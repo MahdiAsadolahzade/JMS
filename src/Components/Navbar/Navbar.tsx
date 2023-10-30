@@ -1,15 +1,22 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useUserStore } from "../userStore";
-import { useAppStore } from "../appStore";
-import Theme from "./Theme/Theme";
-import LanguageSelect from "./Language/LanguageSelect";
-import Icons from "../assets/Icons";
+import { useUserStore } from "../../userStore";
+import { useAppStore } from "../../appStore";
+import Theme from "../Theme/Theme";
+import LanguageSelect from "../Language/LanguageSelect";
+import SearchBar from "./SearchBar";
+import { FaSearch } from "react-icons/fa";
+import JMSBar from "./JMSBar";
+import HomeBar from "./HomeBar";
+import AboutBar from "./AboutBar";
+import ContactBar from "./ContactBar";
+import DashboardBar from "./DashboardBar";
+import SignoutBar from "./SignoutBar";
+import LoginBar from "./LoginBar";
 
 const Navbar: React.FC = () => {
   const { user, signOut } = useUserStore();
-  const { darkMode, toggleDarkMode, language, setLanguage } = useAppStore();
-
+  const { darkMode } = useAppStore();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -26,8 +33,8 @@ const Navbar: React.FC = () => {
     setSearchOpen(!searchOpen);
   };
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const handleSearchChange = (newSearchTerm: string) => {
+    setSearchTerm(newSearchTerm);
   };
 
   return (
@@ -37,13 +44,9 @@ const Navbar: React.FC = () => {
       } p-4 text-white relative`}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <div
-          className={`text-2xl font-bold cursor-pointer ${
-            window.innerWidth < 768 ? "hidden" : ""
-          }`}
-        >
-          <Link to="/">JMS</Link>
-        </div>
+        <Link to="/">
+          <JMSBar></JMSBar>
+        </Link>
         <div className="md:hidden cursor-pointer" onClick={handleMenuClick}>
           <div className="w-10 h-10 flex flex-col justify-between">
             <div
@@ -66,24 +69,26 @@ const Navbar: React.FC = () => {
         <div className="md:hidden cursor-pointer" onClick={toggleSearch}>
           <div className="w-10 h-10">
             <div className="relative">
-              <div className={`absolute top-2 left-2 `}>{Icons.search}</div>
+              <div className={`absolute top-2 left-2 `}>
+                <FaSearch />
+              </div>
             </div>
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-4">
           <div className="relative">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Search"
-              className={`${
-                darkMode
-                  ? "bg-gray-700 text-gray-300"
-                  : "bg-gray-200 text-gray-700"
-              } p-2 pl-8 pr-2 rounded-full focus:outline-none`}
-            />
-            <div className="absolute top-2 left-2">{Icons.search}</div>
+            <SearchBar
+              searchTerm={searchTerm}
+              onSearchChange={handleSearchChange}
+              darkMode={darkMode}
+            ></SearchBar>
+            <div
+              className={`absolute top-3 left-2 ${
+                darkMode ? "" : "text-gray-600"
+              }`}
+            >
+              <FaSearch></FaSearch>
+            </div>
           </div>
         </div>
         <ul
@@ -94,37 +99,25 @@ const Navbar: React.FC = () => {
           } z-10`}
         >
           <li>
-            <Link to="/" onClick={closeMenu}>
-              <span className="flex flex-col justify-center items-center">
-                {Icons.home}
-                Home
-              </span>
+            <Link to="/" onClick={closeMenu} >
+              <HomeBar></HomeBar>
             </Link>
           </li>
           <li>
             <Link to="/about" onClick={closeMenu}>
-              <span className="flex flex-col justify-center items-center">
-                {Icons.about}
-                About
-              </span>
+              <AboutBar></AboutBar>
             </Link>
           </li>
           <li>
             <Link to="/contact" onClick={closeMenu}>
-              <span className="flex flex-col justify-center items-center">
-                {Icons.contact}
-                Contact
-              </span>
+              <ContactBar></ContactBar>
             </Link>
           </li>
           {user ? (
             <>
               <li>
                 <Link to="/dashboard" onClick={closeMenu}>
-                  <span className="flex flex-col justify-center items-center">
-                    {Icons.dashboard}
-                    Dashboard
-                  </span>
+                  <DashboardBar></DashboardBar>
                 </Link>
               </li>
               <li>
@@ -135,10 +128,7 @@ const Navbar: React.FC = () => {
                   }}
                   className="hover:underline text-blue-400"
                 >
-                  <span className="flex flex-col justify-center items-center">
-                    {Icons.signout}
-                    Sign Out
-                  </span>
+                  <SignoutBar></SignoutBar>
                 </button>
               </li>
             </>
@@ -146,10 +136,7 @@ const Navbar: React.FC = () => {
             <>
               <li>
                 <Link to="/login" onClick={closeMenu}>
-                  <span className="flex flex-col justify-center items-center">
-                    {Icons.login}
-                    Login
-                  </span>
+                  <LoginBar></LoginBar>
                 </Link>
               </li>
             </>
@@ -157,16 +144,10 @@ const Navbar: React.FC = () => {
         </ul>
         {searchOpen && (
           <div className="md:hidden">
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              placeholder="Search"
-              className={`${
-                darkMode
-                  ? "bg-gray-700 text-gray-300"
-                  : "bg-gray-200 text-gray-700"
-              } p-2   rounded-full focus:outline-none`}
+            <SearchBar
+              searchTerm={searchTerm}
+              onSearchChange={handleSearchChange}
+              darkMode={darkMode}
             />
           </div>
         )}
