@@ -5,7 +5,7 @@ interface JMSBarProps {}
 
 const JMSBar: React.FC<JMSBarProps> = ({}) => {
   const { darkMode  } = useAppStore();
-  const [shouldHide, setShouldHide] = useState(window.innerWidth < 768);
+  const [shouldHide, setShouldHide] = useState(window.innerWidth < 1000);
 
   useEffect(() => {
     const handleWindowResize = () => {

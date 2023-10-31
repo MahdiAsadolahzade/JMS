@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useUserStore } from "../../userStore";
 import { useAppStore } from "../../appStore";
 import Theme from "../Theme/Theme";
@@ -13,10 +13,12 @@ import ContactBar from "./ContactBar";
 import DashboardBar from "./DashboardBar";
 import SignoutBar from "./SignoutBar";
 import LoginBar from "./LoginBar";
+import "./NavBar.css";
 
 const Navbar: React.FC = () => {
   const { user, signOut } = useUserStore();
   const { darkMode } = useAppStore();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -44,9 +46,12 @@ const Navbar: React.FC = () => {
       } p-4 text-white relative`}
     >
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/">
+        <NavLink
+          to="/"
+          className={location.pathname === "/" ? "nav-link-active" : ""}
+        >
           <JMSBar></JMSBar>
-        </Link>
+        </NavLink>
         <div className="md:hidden cursor-pointer" onClick={handleMenuClick}>
           <div className="w-10 h-10 flex flex-col justify-between">
             <div
@@ -99,26 +104,60 @@ const Navbar: React.FC = () => {
           } z-10`}
         >
           <li>
-            <Link to="/" onClick={closeMenu} >
+            <NavLink
+              to="/"
+              onClick={closeMenu}
+              className={`${
+                location.pathname === "/"
+                  ? `${darkMode ? " nav-link-active-dark" : "nav-link-active"}`
+                  : ""
+              } hover:animate-pulse`}
+            >
               <HomeBar></HomeBar>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/about" onClick={closeMenu}>
+            <NavLink
+              to="/about"
+              onClick={closeMenu}
+              className={`${
+                location.pathname === "/about"
+                  ? `${darkMode ? "nav-link-active-dark" : "nav-link-active"}`
+                  : ""
+              } hover:animate-pulse`}
+            >
               <AboutBar></AboutBar>
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/contact" onClick={closeMenu}>
+            <NavLink
+              to="/contact"
+              onClick={closeMenu}
+              className={`${
+                location.pathname === "/contact"
+                  ? `${darkMode ? "nav-link-active-dark" : "nav-link-active"}`
+                  : ""
+              } hover:animate-pulse`}
+            >
               <ContactBar></ContactBar>
-            </Link>
+            </NavLink>
           </li>
           {user ? (
             <>
               <li>
-                <Link to="/dashboard" onClick={closeMenu}>
+                <NavLink
+                  to="/dashboard"
+                  onClick={closeMenu}
+                  className={`${
+                    location.pathname === "/dashboard"
+                      ? `${
+                          darkMode ? "nav-link-active-dark" : "nav-link-active"
+                        }`
+                      : ""
+                  } hover:animate-pulse`}
+                >
                   <DashboardBar></DashboardBar>
-                </Link>
+                </NavLink>
               </li>
               <li>
                 <button
@@ -126,7 +165,9 @@ const Navbar: React.FC = () => {
                     signOut();
                     closeMenu();
                   }}
-                  className="hover:underline text-blue-400"
+                  className={`hover:underline font-bold hover:animate-pulse ${
+                    darkMode ? "text-rose-800" : "text-gray-600"
+                  }`}
                 >
                   <SignoutBar></SignoutBar>
                 </button>
@@ -135,9 +176,19 @@ const Navbar: React.FC = () => {
           ) : (
             <>
               <li>
-                <Link to="/login" onClick={closeMenu}>
+                <NavLink
+                  to="/login"
+                  onClick={closeMenu}
+                  className={`${
+                    location.pathname === "/login"
+                      ? `${
+                          darkMode ? "nav-link-active-dark" : "nav-link-active"
+                        }`
+                      : ""
+                  } hover:animate-pulse`}
+                >
                   <LoginBar></LoginBar>
-                </Link>
+                </NavLink>
               </li>
             </>
           )}

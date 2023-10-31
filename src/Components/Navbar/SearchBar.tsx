@@ -28,7 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           darkMode
             ? "bg-gray-700 text-gray-300"
             : "bg-gray-200 text-gray-700"
-        } p-2 pl-8 pr-2 rounded-full focus:outline-none`}
+        } p-2 pl-8 pr-2 rounded-full focus:outline-none text-center`}
       />
   );
 };
