@@ -10,7 +10,7 @@ function Theme() {
       <Switch
         onChange={toggleDarkMode}
         checked={darkMode}
-        onColor="#007bff"
+        onColor="#6CC0B9"
         onHandleColor="#ffffff"
         offColor="#111827"
         offHandleColor="#ffffff"

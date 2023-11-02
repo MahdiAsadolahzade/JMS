@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
   return (
     <nav
       className={`${
-        darkMode ? "bg-gray-900" : "bg-blue-500"
+        darkMode ? "bg-gray-900" : "bg-teal-500 "
       } p-4 text-white relative`}
     >
       <div className="container mx-auto flex justify-between items-center">
@@ -98,12 +98,12 @@ const Navbar: React.FC = () => {
         </div>
         <ul
           className={`md:flex flex-col md:flex-row space-y-4 md:space-x-8 ${
-            menuOpen ? "flex justify-center items-center w-full" : "hidden"
+            menuOpen ? "flex justify-center items-center w-full " : "hidden"
           } md:space-y-0 absolute top-full left-0 mt-2 md:relative ${
-            darkMode ? "bg-gray-900" : "bg-blue-500"
+            darkMode ? "bg-gray-900" : "bg-teal-500"
           } z-10`}
         >
-          <li>
+          <li >
             <NavLink
               to="/"
               onClick={closeMenu}

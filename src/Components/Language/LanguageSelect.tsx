@@ -34,12 +34,12 @@ const LanguageSelect: React.FC = () => {
           className={`hidden group-hover:block absolute top-full left-0 w-24 py-2 ${
             darkMode
               ? "bg-gray-800 border-gray-600"
-              : "bg-blue-500 border-blue-300"
+              : "bg-teal-800 border-teal-300"
           } text-white border  rounded z-10`}
         >
           <div
             className={`flex items-center px-2 py-1 ${
-              darkMode ? "hover:bg-gray-600" : "hover:bg-blue-400"
+              darkMode ? "hover:bg-gray-600" : "hover:bg-[#6CC0B9]"
             }  cursor-pointer`}
             onClick={() => handleLanguageChange("English")}
           >
@@ -50,7 +50,7 @@ const LanguageSelect: React.FC = () => {
           </div>
           <div
             className={`flex items-center px-2 py-1 ${
-              darkMode ? "hover:bg-gray-600" : "hover:bg-blue-400"
+              darkMode ? "hover:bg-gray-600" : "hover:bg-[#6CC0B9]"
             } cursor-pointer`}
             onClick={() => handleLanguageChange("Farsi")}
           >
