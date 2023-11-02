@@ -19,6 +19,7 @@
     "react-select": "^5.7.7",
     "react-switch": "^7.0.0",
     "react-three-fiber": "^6.0.13",
+    "simplebar": "^6.2.5",
     "three": "^0.158.0",
     "zustand": "^4.4.4"
   },

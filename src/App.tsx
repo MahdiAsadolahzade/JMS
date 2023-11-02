@@ -10,11 +10,11 @@ import Register from "./Components/Register";
 import { useAppStore } from "./appStore";
 
 const App: React.FC = () => {
-  const { language } = useAppStore();
+  const { language , darkMode } = useAppStore();
   return (
     <Router>
       <Navbar />
-      <div className={`app-container ${language === "Farsi" ? "rtl" : "ltr"}`}>
+      <div className={`app-container  ${language === "Farsi" ? "rtl" : "ltr"}`}>
         <Routes>
           <Route path="/" Component={Home} />
           <Route path="/about" Component={About} />
