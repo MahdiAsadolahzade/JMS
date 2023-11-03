@@ -1,0 +1,35 @@
+.animate-shapes {
+    width: 57.6px;
+    height: 57.6px;
+    color: #474bff;
+    background: linear-gradient(currentColor 0 0),
+                linear-gradient(currentColor 0 0),
+                linear-gradient(currentColor 0 0),
+                linear-gradient(currentColor 0 0);
+    background-size: 29.8px 29.8px;
+    background-repeat: no-repeat;
+    animation: shapes-53h9rplg 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+  }
+  
+  @keyframes shapes-53h9rplg {
+    0% {
+      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+    }
+  
+    33% {
+      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+      width: 86.4px;
+      height: 86.4px;
+    }
+  
+    66% {
+      background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+      width: 86.4px;
+      height: 86.4px;
+    }
+  
+    100% {
+      background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+    }
+  }
+  
