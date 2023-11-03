@@ -1,4 +1,7 @@
 import { useAppStore } from "../../appStore";
+import {BiTask} from "react-icons/bi"
+import {AiOutlineTeam} from "react-icons/ai"
+import{GiHiveMind} from "react-icons/gi"
 import "./AboutCard.css"
 
 const AboutSection1 = () => {
@@ -23,10 +26,11 @@ const AboutSection1 = () => {
           } bg-opacity-20 rounded-xl`}
         >
           <h2
-            className={`text-2xl font-bold ${
+            className={`text-2xl font-bold flex items-center ${
               darkMode ? "text-gray-100" : "text-gray-900"
             } mb-4`}
           >
+            <span className="m-2"><BiTask></BiTask></span>
             {language === "English" ? "Our Mission" : "ماموریت  ما"}
           </h2>
           <p className="text-lg">
@@ -41,10 +45,11 @@ const AboutSection1 = () => {
           } bg-opacity-20 rounded-xl`}
         >
           <h2
-            className={`text-2xl font-bold ${
+            className={`text-2xl font-bold flex items-center ${
               darkMode ? "text-gray-100" : "text-gray-900"
             } mb-4`}
           >
+            <span className="m-2"><AiOutlineTeam></AiOutlineTeam></span>
             {language === "English" ? "Our Team" : " تیم ما"}
           </h2>
           <p className="text-lg">
@@ -60,10 +65,11 @@ const AboutSection1 = () => {
           } bg-opacity-20 rounded-xl`}
         >
           <h2
-            className={`text-2xl font-bold ${
+            className={`text-2xl font-bold flex items-center ${
               darkMode ? "text-gray-100" : "text-gray-900"
             } mb-4`}
           >
+            <span className="m-2"><GiHiveMind></GiHiveMind></span>
             {language === "English" ? "Our beliefs" : " اعتقادات ما"}
           </h2>
           <p className="text-lg">
