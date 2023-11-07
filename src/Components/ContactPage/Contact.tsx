@@ -20,7 +20,7 @@ const Contact = () => {
 
   return (
     <div
-      className={`custom-overflow h-[89.5vh] ${
+      className={`custom-overflow h-[90vh] ${
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
     >

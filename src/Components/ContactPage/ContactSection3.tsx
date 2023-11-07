@@ -49,7 +49,7 @@ const FAQSection = () => {
   const [openQuestion, setOpenQuestion] = useState(null);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen ">
         <div
       className={`${darkMode ? "bg-gray-500" : "bg-teal-100"} mx-auto rounded-md shadow-xl p-6 text-${
         darkMode ? "gray-200" : "gray-900"
@@ -62,7 +62,7 @@ const FAQSection = () => {
       {faqData.map((item, index: any) => (
         <div key={index} className="mb-4">
           <div
-            className={`flex items-center justify-between ${
+            className={`flex h-16 items-center justify-between ${
               darkMode ? "bg-gray-700" : "bg-white"
             } pl-3 pr-2 py-3 w-full rounded text-${
               darkMode ? "gray-200" : "gray-600"
@@ -82,7 +82,7 @@ const FAQSection = () => {
             </span>
           </div>
           {index === openQuestion && (
-            <div className={`p-3 ${darkMode ? "text-gray-200" : "text-gray-600"}`}>
+            <div className={`p-8  ${darkMode ? "text-gray-200" : "text-gray-600"}`}>
               <p className=" mb-3">{item.answer}</p>
             </div>
           )}

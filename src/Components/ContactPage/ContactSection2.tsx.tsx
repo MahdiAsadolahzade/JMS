@@ -6,10 +6,10 @@ const ContactSection2 = () => {
   return (
     <div className="h-screen">
       <div
-      className={`p-6 cursor-pointer ${
+      className={`p-6 mx-8 cursor-pointer ${
         darkMode
           ? "bg-gray-500"
-          : "bg-teal-100"
+          : "bg-teal-50"
       }   shadow-2xl rounded-xl `}
     >
       <div className={`text-${darkMode ? "gray-200" : "gray-900"}`}>

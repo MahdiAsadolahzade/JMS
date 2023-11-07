@@ -1,31 +1,81 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  Outlet,
+  Navigate,
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Home";
+import Home from "./Components/Home/Home";
 import About from "./Components/AboutPage/About";
 import Contact from "./Components/ContactPage/Contact";
 import Dashboard from "./Components/Dashboard";
-import Login from "./Components/login";
-import Register from "./Components/Register";
+import Login from "./Components/AuthLayout/login";
+import Register from "./Components/AuthLayout/Register";
 import { useAppStore } from "./appStore";
+import { useUserStore } from "./userStore";
 
 const App: React.FC = () => {
-  const { language , darkMode } = useAppStore();
-  return (
-    <Router>
-      <Navbar />
-      <div className={`app-container  ${language === "Farsi" ? "rtl" : "ltr"}`}>
-        <Routes>
-          <Route path="/" Component={Home} />
-          <Route path="/about" Component={About} />
-          <Route path="/contact" Component={Contact} />
-          <Route path="/dashboard" Component={Dashboard} />
-          <Route path="/login" Component={Login} />
-          <Route path="/register" Component={Register} />
-        </Routes>
+  const Layout = () => {
+    const { language } = useAppStore();
+    return (
+      <div>
+        <Navbar />
+        <div
+          className={`app-container  ${language === "Farsi" ? "rtl" : "ltr"}`}
+        >
+          <Outlet />
+        </div>
       </div>
-    </Router>
-  );
+    );
+  };
+
+  const ProtectedRoute = ({ children }: any) => {
+    const { user } = useUserStore();
+    if (user) {
+      return <Navigate to={"/login"} />;
+    }
+    return children;
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: (
+        <ProtectedRoute>
+          <Layout />
+        </ProtectedRoute>
+      ),
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/dashboard/:id",
+          element: <Dashboard />,
+        },
+        {
+          path: "/about",
+          element: <About />,
+        },
+        {
+          path: "/contact",
+          element: <Contact />,
+        },
+      ],
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 };
 
 export default App;

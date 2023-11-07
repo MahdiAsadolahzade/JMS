@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
     <nav
       className={`${
         darkMode ? "bg-gray-900" : "bg-teal-500 "
-      } p-4 text-white relative`}
+      } p-4 h-[10vh] text-white relative`}
     >
       <div className="container mx-auto flex justify-between items-center">
         <NavLink
@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
               darkMode={darkMode}
             ></SearchBar>
             <div
-              className={`absolute top-3 left-2 ${
+              className={`absolute top-3 left-3 ${
                 darkMode ? "" : "text-gray-600"
               }`}
             >
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
             darkMode ? "bg-gray-900" : "bg-teal-500"
           } z-10`}
         >
-          <li >
+          <li>
             <NavLink
               to="/"
               onClick={closeMenu}
@@ -165,7 +165,7 @@ const Navbar: React.FC = () => {
                     signOut();
                     closeMenu();
                   }}
-                  className={`hover:underline font-bold hover:animate-pulse ${
+                  className={`hover:underline  hover:animate-pulse ${
                     darkMode ? "text-rose-800" : "text-gray-600"
                   }`}
                 >
@@ -194,7 +194,7 @@ const Navbar: React.FC = () => {
           )}
         </ul>
         {searchOpen && (
-          <div className="md:hidden">
+          <div className="md:hidden ">
             <SearchBar
               searchTerm={searchTerm}
               onSearchChange={handleSearchChange}

@@ -1,11 +1,9 @@
+import Hero from "./Hero";
 import { useState, useEffect } from "react";
 import { useAppStore } from "../../appStore";
-import AboutSection1 from "./AboutSection1";
-import AboutSection2 from "./AboutSection2";
-import "../Scrollbar.css";
-import LoadingAnimation from "../Loading Animation/LoadingAnimation.tsx";
+import LoadingAnimation from "../Loading Animation/LoadingAnimation";
 
-const About = () => {
+const Home = () => {
   const { darkMode } = useAppStore();
   const [loading, setLoading] = useState(true);
 
@@ -16,8 +14,9 @@ const About = () => {
 
     return () => clearTimeout(timeout);
   }, []);
-  return (
-    <div
+
+    return (
+      <div
       className={`custom-overflow h-[90vh] ${
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
@@ -28,13 +27,19 @@ const About = () => {
         </div>
       ) : (
         <>
-          <AboutSection1></AboutSection1>
-
-          <AboutSection2></AboutSection2>
+          <Hero />
+          
         </>
       )}
     </div>
-  );
-};
+    );
+  };
+  
+  export default Home;
+  
 
-export default About;
+
+
+
+
+
