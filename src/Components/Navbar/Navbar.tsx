@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
         <ul
-          className={`md:flex flex-col md:flex-row space-y-4 md:space-x-8 ${
+          className={`md:flex md:max-h-[5vh] flex-col md:flex-row space-y-4 md:space-x-8 ${
             menuOpen ? "flex justify-center items-center w-full " : "hidden"
           } md:space-y-0 absolute top-full left-0 mt-2 md:relative ${
             darkMode ? "bg-gray-900" : "bg-teal-500"

@@ -1,7 +1,10 @@
-import Hero from "./Hero";
 import { useState, useEffect } from "react";
 import { useAppStore } from "../../appStore";
 import LoadingAnimation from "../Loading Animation/LoadingAnimation";
+import Hero from "./HeroSection";
+import FeaturesSection from "./FeaturesSection";
+import StatisticsSection from "./StatisticsSection";
+import TestimonialsSection from "./TestimonialsSection";
 
 const Home = () => {
   const { darkMode } = useAppStore();
@@ -15,9 +18,9 @@ const Home = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-    return (
-      <div
-      className={`custom-overflow h-[90vh] ${
+  return (
+    <div
+      className={`custom-overflow  h-[90vh] ${
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
     >
@@ -28,18 +31,13 @@ const Home = () => {
       ) : (
         <>
           <Hero />
-          
+          <FeaturesSection />
+          <StatisticsSection/>
+          <TestimonialsSection/>
         </>
       )}
     </div>
-    );
-  };
-  
-  export default Home;
-  
+  );
+};
 
-
-
-
-
-
+export default Home;
