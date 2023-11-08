@@ -5,6 +5,9 @@ import Hero from "./HeroSection";
 import FeaturesSection from "./FeaturesSection";
 import StatisticsSection from "./StatisticsSection";
 import TestimonialsSection from "./TestimonialsSection";
+import HowItWorksSection from "./HowItWorksSection";
+import FeaturedJournalsSection from "./FeaturedJournalsSection";
+import SearchAndGetStartedSection from "./SearchAndGetStartedSection";
 
 const Home = () => {
   const { darkMode } = useAppStore();
@@ -34,6 +37,10 @@ const Home = () => {
           <FeaturesSection />
           <StatisticsSection/>
           <TestimonialsSection/>
+          <HowItWorksSection/>
+          <FeaturedJournalsSection/>
+          <SearchAndGetStartedSection/>
+
         </>
       )}
     </div>
