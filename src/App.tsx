@@ -9,7 +9,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Home from "./Components/Home/Home";
 import About from "./Components/AboutPage/About";
 import Contact from "./Components/ContactPage/Contact";
-import Dashboard from "./Components/Dashboard";
+import Dashboard from "./Components/DashboardPage/Dashboard";
 import Login from "./Components/AuthLayout/login";
 import Register from "./Components/AuthLayout/Register";
 import { useAppStore } from "./appStore";
@@ -32,9 +32,9 @@ const App: React.FC = () => {
 
   const ProtectedRoute = ({ children }: any) => {
     const { user } = useUserStore();
-    if (user) {
-      return <Navigate to={"/login"} />;
-    }
+    // if (!user) {
+    //   return <Navigate to={"/login"} />;
+    // }
     return children;
   };
 

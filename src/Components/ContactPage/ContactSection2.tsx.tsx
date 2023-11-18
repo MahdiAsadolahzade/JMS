@@ -4,7 +4,7 @@ const ContactSection2 = () => {
   const { darkMode, language } = useAppStore();
 
   return (
-    <div className="h-screen">
+    <div className="h-screen w-[70vw] mx-auto">
       <div
       className={`p-6 mx-8 cursor-pointer ${
         darkMode
@@ -58,7 +58,7 @@ const ContactSection2 = () => {
               id="message"
               name="message"
               rows={4}
-              className={`w-full px-3 py-2 border-2 rounded-md ${
+              className={`w-full min-h-18 max-h-48 px-3 py-2 border-2 rounded-md ${
                 darkMode
                   ? "bg-gray-700 border-gray-500 text-gray-100"
                   : "bg-white border-gray-300 text-gray-900"

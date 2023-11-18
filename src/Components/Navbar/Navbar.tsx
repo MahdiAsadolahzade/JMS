@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useUserStore } from "../../userStore";
 import { useAppStore } from "../../appStore";
 import Theme from "../Theme/Theme";
@@ -16,9 +16,10 @@ import LoginBar from "./LoginBar";
 import "./NavBar.css";
 
 const Navbar: React.FC = () => {
-  const { user, signOut } = useUserStore();
+  const { user, signOut ,signIn } = useUserStore();
   const { darkMode } = useAppStore();
   const location = useLocation();
+  const params = useParams<{ id: string }>();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,6 +40,8 @@ const Navbar: React.FC = () => {
     setSearchTerm(newSearchTerm);
   };
 
+
+  
   return (
     <nav
       className={`${
@@ -142,14 +145,14 @@ const Navbar: React.FC = () => {
               <ContactBar></ContactBar>
             </NavLink>
           </li>
-          {user ? (
+          {user  ?(
             <>
               <li>
                 <NavLink
-                  to="/dashboard"
+                  to={`/dashboard/${user.id}`}
                   onClick={closeMenu}
                   className={`${
-                    location.pathname === "/dashboard"
+                    location.pathname === `/dashboard/${user.id}`
                       ? `${
                           darkMode ? "nav-link-active-dark" : "nav-link-active"
                         }`
@@ -166,7 +169,7 @@ const Navbar: React.FC = () => {
                     closeMenu();
                   }}
                   className={`hover:underline  hover:animate-pulse ${
-                    darkMode ? "text-rose-800" : "text-gray-600"
+                    darkMode ? "text-rose-800" : "text-rose-800"
                   }`}
                 >
                   <SignoutBar></SignoutBar>

@@ -1,9 +1,14 @@
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppStore } from "../../appStore";
+import { useUserStore } from "../../userStore";
 
 const Login = () => {
   const { darkMode, language } = useAppStore();
+  const { signIn } = useUserStore(); // assuming you have a signIn method in your user store
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const containerClasses = ` ${language === "Farsi" ? "rtl" : "ltr"} min-h-screen flex items-center justify-center ${
     darkMode ? "bg-gray-700" : "bg-teal-50"
@@ -24,21 +29,30 @@ const Login = () => {
     darkMode ? "text-gray-50" : "text-gray-600"
   }`;
 
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+
+    
+    signIn();
+  };
+
   return (
     <div className={containerClasses}>
       <div className={`max-w-md w-full p-4 ${
         darkMode ? "bg-gray-500" : "bg-white"
       }  shadow-lg rounded-lg`}>
-        <h2 className={titleClasses}>{language==="English"?"Login":"ورود"}</h2>
-        <form>
+        <h2 className={titleClasses}>{language === "English" ? "Login" : "ورود"}</h2>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="email" className={labelClasses}>
-            {language==="English"?"Email":"ایمیل"}
+              {language === "English" ? "Email" : "ایمیل"}
             </label>
             <input
               type="email"
               id="email"
               name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className={inputClasses}
               placeholder={
                 language === "Farsi" ? "آدرس ایمیل شما" : "Your email"
@@ -47,12 +61,14 @@ const Login = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="password" className={labelClasses}>
-            {language==="English"?"Password":"رمز"}
+              {language === "English" ? "Password" : "رمز"}
             </label>
             <input
               type="password"
               id="password"
               name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className={inputClasses}
               placeholder={
                 language === "Farsi" ? "رمز عبور شما" : "Your password"
