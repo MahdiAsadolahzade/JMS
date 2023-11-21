@@ -1,6 +1,7 @@
 import { useAppStore } from "../../appStore";
-import {MdEmail} from "react-icons/md"
-import {BiSolidPhoneCall} from "react-icons/bi"
+import { MdEmail } from "react-icons/md";
+import { BiSolidPhoneCall } from "react-icons/bi";
+import Icons from "../../assets/Icons";
 const ContactSection1 = () => {
   const { darkMode, language } = useAppStore();
 
@@ -21,7 +22,7 @@ const ContactSection1 = () => {
   };
 
   return (
-    <div className="container min-h-screen mx-auto py-12">
+    <div className="container h-[90vh] mx-auto py-12">
       <div className="text-center">
         <h1 className="text-4xl font-bold">
           {language === "English" ? "Contact Us" : "تماس با ما"}
@@ -34,8 +35,6 @@ const ContactSection1 = () => {
       </div>
 
       <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-
         <div
           className={`p-6 custom-card cursor-pointer ${
             darkMode ? "bg-white" : "bg-teal-300"
@@ -46,8 +45,10 @@ const ContactSection1 = () => {
               darkMode ? "text-gray-100" : "text-gray-900"
             } mb-4`}
           >
-            <span className="m-2"><MdEmail></MdEmail></span>
-            
+            <span className="m-2">
+              <MdEmail></MdEmail>
+            </span>
+
             {language === "English" ? "Email Us" : "ایمیل به ما"}
           </h2>
           <p className="text-lg">
@@ -74,7 +75,9 @@ const ContactSection1 = () => {
               darkMode ? "text-gray-100" : "text-gray-900"
             } mb-4`}
           >
-            <span className="m-2"><BiSolidPhoneCall></BiSolidPhoneCall></span>
+            <span className="m-2">
+              <BiSolidPhoneCall></BiSolidPhoneCall>
+            </span>
             {language === "English" ? "Call Us" : "تماس با ما"}
           </h2>
           <p className="text-lg">
@@ -92,6 +95,7 @@ const ContactSection1 = () => {
           </p>
         </div>
       </div>
+      <div className="flex justify-center items-center">{Icons.contact}</div>
     </div>
   );
 };

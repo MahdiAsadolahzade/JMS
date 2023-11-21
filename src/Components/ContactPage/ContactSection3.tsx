@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useAppStore } from "../../appStore";
-import {AiOutlinePlus} from "react-icons/ai"
-import {AiOutlineMinus} from "react-icons/ai"
-import {FaQuestionCircle} from "react-icons/fa"
+import { AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus } from "react-icons/ai";
+import { FaQuestionCircle } from "react-icons/fa";
 
 const FAQSection = () => {
   const { darkMode, language } = useAppStore();
@@ -49,46 +49,59 @@ const FAQSection = () => {
   const [openQuestion, setOpenQuestion] = useState(null);
 
   return (
-    <div className="h-screen ">
-        <div
-      className={`${darkMode ? "bg-gray-500" : "bg-teal-100"} mx-auto rounded-md shadow-xl p-6 text-${
-        darkMode ? "gray-200" : "gray-900"
-      }`}
-    >
+    <div className="h-[90vh] py-24">
+      <div
+        className={`${
+          darkMode ? "bg-gray-500" : "bg-teal-100"
+        } mx-auto rounded-md shadow-xl p-6 text-${
+          darkMode ? "gray-200" : "gray-900"
+        }`}
+      >
         <h2 className="text-2xl flex items-center font-bold mb-4">
-          <span className="m-2"><FaQuestionCircle></FaQuestionCircle></span>
+          <span className="m-2">
+            <FaQuestionCircle></FaQuestionCircle>
+          </span>
           {language === "English" ? "FAQ " : "سوالات پرتکرار "}
         </h2>
-      {faqData.map((item, index: any) => (
-        <div key={index} className="mb-4">
-          <div
-            className={`flex h-16 items-center justify-between ${
-              darkMode ? "bg-gray-700" : "bg-white"
-            } pl-3 pr-2 py-3 w-full rounded text-${
-              darkMode ? "gray-200" : "gray-600"
-            } font-bold cursor-pointer ${
-              darkMode ? "hover:bg-gray-600" : "hover:bg-gray-300"
-            }`}
-            onClick={() =>
-              setOpenQuestion(index === openQuestion ? null : index)
-            }
-          >
-            {item.question}
-            <span className={`h-6 w-6 flex items-center justify-center ${darkMode?"text-teal-500":"text-gray-500"} `}>
-              {index===openQuestion? <AiOutlineMinus ></AiOutlineMinus>:<AiOutlinePlus></AiOutlinePlus>}
-              
-
-              
-            </span>
-          </div>
-          {index === openQuestion && (
-            <div className={`p-8  ${darkMode ? "text-gray-200" : "text-gray-600"}`}>
-              <p className=" mb-3">{item.answer}</p>
+        {faqData.map((item, index: any) => (
+          <div key={index} className="mb-4">
+            <div
+              className={`flex h-16 items-center justify-between ${
+                darkMode ? "bg-gray-700" : "bg-white"
+              } pl-3 pr-2 py-3 w-full rounded text-${
+                darkMode ? "gray-200" : "gray-600"
+              } font-bold cursor-pointer ${
+                darkMode ? "hover:bg-gray-600" : "hover:bg-gray-300"
+              }`}
+              onClick={() =>
+                setOpenQuestion(index === openQuestion ? null : index)
+              }
+            >
+              {item.question}
+              <span
+                className={`h-6 w-6 flex items-center justify-center ${
+                  darkMode ? "text-teal-500" : "text-gray-500"
+                } `}
+              >
+                {index === openQuestion ? (
+                  <AiOutlineMinus></AiOutlineMinus>
+                ) : (
+                  <AiOutlinePlus></AiOutlinePlus>
+                )}
+              </span>
             </div>
-          )}
-        </div>
-      ))}
-    </div>
+            {index === openQuestion && (
+              <div
+                className={`p-8  ${
+                  darkMode ? "text-gray-200" : "text-gray-600"
+                }`}
+              >
+                <p className=" mb-3">{item.answer}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

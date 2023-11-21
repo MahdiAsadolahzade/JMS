@@ -26,7 +26,7 @@ const FeaturesSection = () => {
     <section
       className={`${darkMode ? "bg-gray-800" : "bg-teal-100"} h-[90vh]  text-${
         darkMode ? "white" : "gray-800"
-      } pt-48`}
+      } py-16`}
     >
       <div className="container mx-auto text-center">
         <h2 className="text-3xl font-bold mb-6">

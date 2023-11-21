@@ -8,7 +8,7 @@ const AboutSection1 = () => {
   const { darkMode, language } = useAppStore();
 
   return (
-    <div className="container min-h-screen mx-auto py-12">
+    <div className="container h-auto  md:h-[90vh]  mx-auto py-12">
       <div className="text-center">
         <h1 className="text-4xl font-bold">
           {language === "English" ? "About Us" : "درباره ما"}
@@ -19,7 +19,7 @@ const AboutSection1 = () => {
             : " ما یک تیم پرشور هستیم که به ایجاد راه حل های نوآورانه اختصاص یافته است."}
         </p>
       </div>
-      <div className="mt-12 p-3 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="mt-12 p-3 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div
           className={`p-6  custom-card cursor-pointer ${
             darkMode ? "bg-white" : "bg-teal-300"
@@ -45,7 +45,7 @@ const AboutSection1 = () => {
           } bg-opacity-20 rounded-xl`}
         >
           <h2
-            className={`text-2xl font-bold flex items-center ${
+            className={`text-2xl font-bold flex items-center  ${
               darkMode ? "text-gray-100" : "text-gray-900"
             } mb-4`}
           >

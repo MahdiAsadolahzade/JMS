@@ -54,7 +54,7 @@ const TestimonialsSection = () => {
 
   const containerClasses = `h-[90vh]  bg-${
     darkMode ? "gray-800" : "teal-100"
-  } text-${darkMode ? "white" : "gray-800"} py-36`;
+  } text-${darkMode ? "white" : "gray-800"} py-16`;
 
   const testimonialClasses = `p-8 custom-card ${
     darkMode ? "bg-gray-700" : "bg-gray-100"

@@ -1,62 +1,41 @@
-import React, { useState } from 'react';
-import { useUserStore } from '../../userStore';
-import { useAppStore } from '../../appStore';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
+import { useAppStore } from "../../appStore";
+import { useUserStore } from "../../userStore";
+import { BsJournalPlus } from "react-icons/bs";
+// استفاده از روتر React Router
 
-const CreateJournalForm: React.FC = () => {
-  const { user, updateUser } = useUserStore();
+const Dashboard: React.FC = () => {
+  const { user } = useUserStore();
   const { darkMode, language } = useAppStore();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-
-  const handleCreateJournal = () => {
-    if (title.trim() !== '' && content.trim() !== '') {
-      const newJournal = {
-        id: user?.journals.length || 1,
-        title,
-        content,
-      };
-      updateUser({
-        ...user!,
-        journals: [...(user?.journals || []), newJournal],
-      });
-      setTitle('');
-      setContent('');
-      // Logic to create a journal on the server/API call
-      console.log('Creating journal:', newJournal);
-    }
-  };
 
   return (
-    <div className={`bg-${darkMode ? 'gray-900' : 'white'} p-6 rounded-lg shadow-md text-${darkMode ? 'gray-100' : 'gray-600'}`}>
-      {user ? (
-        <>
-          <h2 className="text-xl font-bold mb-4">{language === 'Farsi' ? 'ایجاد یک یادداشت جدید' : 'Create New Journal'}</h2>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border rounded-lg mb-4"
-            placeholder={language === 'Farsi' ? 'عنوان یادداشت خود را وارد کنید' : 'Enter the title of your journal'}
-          />
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full p-2 border rounded-lg mb-4"
-            rows={4}
-            placeholder={language === 'Farsi' ? 'محتوای یادداشت خود را وارد کنید' : 'Write your journal content here'}
-          />
-          <button
-            onClick={handleCreateJournal}
-            className={`bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600`}
-          >
-            {language === 'Farsi' ? 'ایجاد یادداشت' : 'Create Journal'}
+    <div
+      className={`bg-${
+        darkMode ? "gray-900" : "white"
+      } p-6 rounded-lg shadow-md text-${
+        darkMode ? "gray-100" : "gray-600"
+      } h-[20vh] border-2 ${darkMode ? "border-teal-500" : "border-gray-500"}`}
+    >
+      <h2 className="text-2xl flex justify-start items-center  font-bold mb-4">
+        <div className="px-2">
+          <BsJournalPlus />
+        </div>
+        <div>
+          {language === "Farsi"
+            ? "ژورنال جدیدی بسازید"
+            : "Create A New Journal"}
+        </div>
+      </h2>
+      <NavLink to={`/dashboard/${user?.id}/createjournal/1`}>
+        <div className="flex justify-center items-center">
+          <button className="bg-teal-500  hover:bg-teal-700 text-white font-bold py-3 px-5 rounded">
+            {language === "Farsi" ? "از این جا شروع کنید" : "Start From Here"}
           </button>
-        </>
-      ) : (
-        <p>{language === 'Farsi' ? 'لطفاً وارد شوید تا یک یادداشت جدید ایجاد کنید.' : 'Please log in to create a new journal.'}</p>
-      )}
+        </div>
+      </NavLink>
     </div>
   );
 };
 
-export default CreateJournalForm;
+export default Dashboard;

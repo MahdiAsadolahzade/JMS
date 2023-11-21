@@ -12,6 +12,7 @@ import Contact from "./Components/ContactPage/Contact";
 import Dashboard from "./Components/DashboardPage/Dashboard";
 import Login from "./Components/AuthLayout/login";
 import Register from "./Components/AuthLayout/Register";
+import CreateJournal from "./Components/CreateJournalPage/CreateJournal";
 import { useAppStore } from "./appStore";
 import { useUserStore } from "./userStore";
 
@@ -32,9 +33,9 @@ const App: React.FC = () => {
 
   const ProtectedRoute = ({ children }: any) => {
     const { user } = useUserStore();
-    // if (!user) {
-    //   return <Navigate to={"/login"} />;
-    // }
+    if (!user) {
+      return <Navigate to={"/login"} />;
+    }
     return children;
   };
 
@@ -54,6 +55,10 @@ const App: React.FC = () => {
         {
           path: "/dashboard/:id",
           element: <Dashboard />,
+        },
+        {
+          path: "/dashboard/:id/createjournal/:id",
+          element: <CreateJournal />,
         },
         {
           path: "/about",

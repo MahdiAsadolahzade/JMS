@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppStore } from "../../appStore";
+import { FaSearch } from "react-icons/fa"; // افزودن آیکون جستجو
 
 const SearchAndGetStartedSection = () => {
   const { darkMode, language } = useAppStore();
@@ -36,7 +37,7 @@ const SearchAndGetStartedSection = () => {
           <button
             className={`absolute right-0 mr-3 focus:outline-none text-gray-600 hover:text-teal-500`}
           >
-            Search
+            <FaSearch /> {/* افزودن آیکون جستجو */}
           </button>
         </div>
 
@@ -45,7 +46,7 @@ const SearchAndGetStartedSection = () => {
             ? "شروع به جستجو کنید یا ما را دنبال کنید"
             : "Start searching or follow us"}
         </p>
-        <a href="/follow" className="btn btn-primary">
+        <a href="/follow" className="btn btn-primary transition duration-300 transform hover:scale-105">
           {language === "Farsi" ? "دنبال کنید" : "Follow Us"}
         </a>
       </div>

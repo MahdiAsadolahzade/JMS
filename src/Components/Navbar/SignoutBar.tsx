@@ -10,7 +10,7 @@ const SignoutBar: React.FC<SignoutBarProps> = ({}) => {
     <span className="flex flex-col justify-center items-center">
       <AiOutlineLogout />
 
-      {language === "English" && <span className=" ">Sign Out</span>}
+      {language === "English" && <span className=" ">Signout</span>}
       {language === "Farsi" && <span className="font-bold ">خروج </span>}
     </span>
   );
