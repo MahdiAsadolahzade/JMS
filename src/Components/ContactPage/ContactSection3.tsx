@@ -3,6 +3,7 @@ import { useAppStore } from "../../appStore";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineMinus } from "react-icons/ai";
 import { FaQuestionCircle } from "react-icons/fa";
+import FAQsIcon from "../../assets/FAQsIcon";
 
 const FAQSection = () => {
   const { darkMode, language } = useAppStore();
@@ -49,7 +50,10 @@ const FAQSection = () => {
   const [openQuestion, setOpenQuestion] = useState(null);
 
   return (
-    <div className="h-[90vh] py-24">
+    <div className="h-auto py-24">
+      <div className="flex justify-center w-[30vw] mx-auto items-center  ">
+        <FAQsIcon/>
+      </div>
       <div
         className={`${
           darkMode ? "bg-gray-500" : "bg-teal-100"
@@ -102,6 +106,7 @@ const FAQSection = () => {
           </div>
         ))}
       </div>
+      
     </div>
   );
 };

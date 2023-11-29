@@ -6,6 +6,7 @@ import ContactSection3 from "./ContactSection3.tsx";
 import "./Contact.css";
 import LoadingAnimation from "../Loading Animation/LoadingAnimation.tsx";
 
+
 const Contact = () => {
   const { darkMode } = useAppStore();
   const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ const Contact = () => {
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
     >
+      
       {loading ? (
         <div className="flex items-center justify-center h-full">
           <LoadingAnimation />
@@ -33,6 +35,7 @@ const Contact = () => {
           <ContactSection1 />
           <ContactSection2 />
           <ContactSection3 />
+          
         </>
       )}
     </div>
