@@ -4,7 +4,7 @@ const ContactSection2 = () => {
   const { darkMode, language } = useAppStore();
 
   return (
-    <div className="h-[90vh] w-full md:w-[70vw] mx-auto">
+    <div className="h-[90vh] w-full py-20 md:w-[70vw] mx-auto">
       <div
         className={`p-6 mx-8 cursor-pointer ${
           darkMode ? "bg-gray-500" : "bg-teal-50"

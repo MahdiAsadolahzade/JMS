@@ -1,11 +1,12 @@
 
 import { useAppStore } from "../../appStore";
-import { FaShare, FaHeart, FaStar, FaComment } from "react-icons/fa"; // Import icons
+import { FaShare, FaHeart, FaStar, FaComment } from "react-icons/fa";
+import FeaturedJournalsIcon from "../../assets/FeaturedJournalsIcon"; // Import icons
 
 const FeaturedJournalsSection = () => {
   const { darkMode, language } = useAppStore();
 
-  const containerClasses = `h-[90vh] custom-overflow ${darkMode ? "bg-gray-800 dark" : "bg-teal-100"} text-${
+  const containerClasses = `h-auto min-h-screen custom-overflow ${darkMode ? "bg-gray-800 dark" : "bg-teal-100"} text-${
     darkMode ? "white" : "gray-800"
   } py-16`;
 
@@ -29,12 +30,18 @@ const FeaturedJournalsSection = () => {
 
   return (
     <section id="featured-journals-section" className={containerClasses}>
-      <div className="container mx-auto text-center">
+    <div className="grid grid-cols-1 md:grid-cols-2 px-4">
+      
+    <div className="my-auto">
+        <FeaturedJournalsIcon/>
+      </div>
+    <div className="my-auto">
+     <div className="container mx-auto text-center">
         <h2 className={headingClasses}>
           {language === "Farsi" ? "مقالات ویژه" : "Featured Journals"}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {Array.from({ length: 6 }).map((_, index) => (
+        <div className="grid grid-cols-1  gap-4">
+          {Array.from({ length: 3 }).map((_, index) => (
             <div key={index} className={cardClasses}>
               <div className={cardHeaderClasses}>
                 <h3 className="text-xl font-semibold">
@@ -80,6 +87,9 @@ const FeaturedJournalsSection = () => {
           {language === "Farsi" ? "نمایش بیشتر" : "Show More"}
         </button>
       </div>
+     </div>
+
+    </div>
     </section>
   );
 };

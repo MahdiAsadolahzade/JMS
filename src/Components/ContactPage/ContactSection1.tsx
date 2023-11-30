@@ -22,7 +22,7 @@ const ContactSection1 = () => {
   };
 
   return (
-    <div className="container h-[90vh] mx-auto py-12">
+    <div className="container h-auto min-h-screen mx-auto py-12">
       <div className="text-center">
         <h1 className="text-4xl font-bold">
           {language === "English" ? "Contact Us" : "تماس با ما"}
@@ -60,7 +60,7 @@ const ContactSection1 = () => {
               <a
                 href="mailto:mahdiasadi140@gmail.com"
                 className={`hover:underline ${
-                  darkMode ? "text-blue-300" : "text-blue-500"
+                  darkMode ? "text-gray-300" : "text-blue-500"
                 }`}
               >
                 {language === "English"
@@ -89,7 +89,7 @@ const ContactSection1 = () => {
               <a
                 href="tel:+989927355092"
                 className={`hover:underline  ${
-                  darkMode ? "text-blue-300" : "text-blue-500"
+                  darkMode ? "text-gray-300" : "text-blue-500"
                 }`}
                 dir={`${language === "Farsi" ? "ltr" : ""}`}
               >

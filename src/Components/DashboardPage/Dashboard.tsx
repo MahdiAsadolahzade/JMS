@@ -3,6 +3,7 @@ import JournalList from "./JournalList";
 import UserProfile from "./UserProfile";
 import CreateJournalForm from "./CreateJournalForm";
 import { useAppStore } from "../../appStore";
+import DashboardIcon from "../../assets/DashboardIcon";
 
 const Dashboard: React.FC = () => {
   const { darkMode } = useAppStore();
@@ -20,9 +21,13 @@ const Dashboard: React.FC = () => {
           </div>
           <div className="md:col-span-1 lg:col-span-2 space-y-[2.5vh]">
             <CreateJournalForm />
+            <div className="w-[60%] mx-auto my-auto"><DashboardIcon/></div>
+          </div>
+          
+        </div>
+        <div className="w-full py-4 ">
             <JournalList />
           </div>
-        </div>
       </div>
     </div>
   );

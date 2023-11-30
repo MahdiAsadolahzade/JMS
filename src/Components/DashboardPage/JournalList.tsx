@@ -12,9 +12,9 @@ const JournalList: React.FC = () => {
     <div
       className={`bg-${
         darkMode ? "gray-900" : "white"
-      } p-6 rounded-lg h-[60vh] custom-overflow shadow-md text-${
+      } p-6 rounded-lg h-[60vh]  custom-overflow shadow-md text-${
         darkMode ? "gray-100" : "gray-600"
-      } h-[80vh] border-2 ${darkMode ? "border-teal-500" : "border-gray-500"}`}
+      } h-[60vh] border-2 ${darkMode ? "border-teal-500" : "border-gray-500"}`}
     >
       {user ? (
         <>

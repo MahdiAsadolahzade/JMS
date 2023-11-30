@@ -50,12 +50,13 @@ const FAQSection = () => {
   const [openQuestion, setOpenQuestion] = useState(null);
 
   return (
-    <div className="h-auto py-24">
-      <div className="flex justify-center w-[30vw] mx-auto items-center  ">
+    <div className="h-auto  py-40  px-8">
+      <div className="grid grid-cols-1  md:grid-cols-2">
+      <div className="  mx-auto w-[85%]  col-span-1 ">
         <FAQsIcon/>
       </div>
       <div
-        className={`${
+        className={`col-span-1 w-full ${
           darkMode ? "bg-gray-500" : "bg-teal-100"
         } mx-auto rounded-md shadow-xl p-6 text-${
           darkMode ? "gray-200" : "gray-900"
@@ -105,6 +106,7 @@ const FAQSection = () => {
             )}
           </div>
         ))}
+      </div>
       </div>
       
     </div>

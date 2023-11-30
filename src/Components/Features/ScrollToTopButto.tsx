@@ -1,30 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { FaArrowUp } from "react-icons/fa";
+import React from "react";
+import { useEffect, useState } from "react";
 
-const ScrollToTopButton = () => {
+const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // افزودن listener به رویداد scroll
-    const handleScroll = () => {
-      // دریافت ارتفاع اسکرول
-      const scrollY = window.scrollY;
-
-      // تعیین شرط نمایش یا عدم نمایش دکمه
-      setIsVisible(scrollY > 0);
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
     };
 
-    // افزودن listener به رویداد scroll
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", toggleVisibility);
 
-    // حذف listener در زمان unmount کامپوننت
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []); // useEffect را یک‌بار فقط اجرا کنید
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
 
   const scrollToTop = () => {
-    // اسکرول به بالا با smooth behavior
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -32,16 +26,14 @@ const ScrollToTopButton = () => {
   };
 
   return (
-    <>
-      {isVisible && (
-        <div
-          className="fixed bottom-4 right-4 bg-blue-500 p-2 rounded-full cursor-pointer"
-          onClick={scrollToTop}
-        >
-          <FaArrowUp className="text-white" />
-        </div>
-      )}
-    </>
+    <button
+      className={`fixed right-4 bottom-4 p-3 bg-blue-500 text-white rounded-full transition-opacity ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
+      onClick={scrollToTop}
+    >
+      Scroll To Top
+    </button>
   );
 };
 

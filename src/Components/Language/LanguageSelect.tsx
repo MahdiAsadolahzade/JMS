@@ -27,7 +27,7 @@ const LanguageSelect: React.FC = () => {
               backgroundSize: "cover",
             }}
           ></div>
-          {language}
+          {/* {language} */}
           <FaChevronDown className="ml-1" />
         </button>
         <div

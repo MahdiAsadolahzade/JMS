@@ -1,92 +1,126 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppStore } from "../../appStore";
 import { useUserStore } from "../../userStore";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import LoginIcon from "../../assets/LoginIcon";
 
 const Login = () => {
   const { darkMode, language } = useAppStore();
-  const { signIn } = useUserStore(); // assuming you have a signIn method in your user store
-
+  const { signIn } = useUserStore();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const containerClasses = ` ${language === "Farsi" ? "rtl" : "ltr"} min-h-screen flex items-center justify-center ${
-    darkMode ? "bg-gray-700" : "bg-teal-50"
-  }`;
+  const containerClasses = ` ${
+    language === "Farsi" ? "rtl" : "ltr"
+  }  h-screen custom-overflow ${darkMode ? "bg-gray-700" : ""}`;
 
-  const labelClasses = `block ${
-    darkMode ? "text-gray-100" : "text-gray-600"
-  }`;
+  const labelClasses = `block w-full ${darkMode ? "text-gray-100" : "text-gray-600"}`;
   const inputClasses = `w-full ${
     darkMode ? "bg-gray-200" : "bg-teal-50"
-  } p-2 border rounded-lg`;
+  } p-2 border rounded-lg relative`;
   const buttonClasses =
     "w-full p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600";
-  const titleClasses = `text-2xl ${
+  const titleClasses = `text-2xl w-full ${
     darkMode ? "text-gray-50" : "text-gray-600"
   } font-bold mb-4`;
-  const textClasses = `mt-4 text-center ${
+  const textClasses = `mt-4 w-full text-center w-full ${
     darkMode ? "text-gray-50" : "text-gray-600"
   }`;
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    
     signIn();
   };
 
   return (
     <div className={containerClasses}>
-      <div className={`max-w-md w-full p-4 ${
-        darkMode ? "bg-gray-500" : "bg-white"
-      }  shadow-lg rounded-lg`}>
-        <h2 className={titleClasses}>{language === "English" ? "Login" : "ورود"}</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="email" className={labelClasses}>
-              {language === "English" ? "Email" : "ایمیل"}
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={inputClasses}
-              placeholder={
-                language === "Farsi" ? "آدرس ایمیل شما" : "Your email"
-              }
-            />
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <div className="w-[85%] my-auto hidden md:block">
+          <LoginIcon />
+        </div>
+        <div
+          className={` w-full h-screen flex flex-col items-center px-8  justify-center ${
+            darkMode ? "bg-gray-500" : ""
+          }  `}
+        >
+          <div className="w-full">
+            <h2 className={titleClasses}>
+              {language === "English" ? "Login" : "ورود"}
+            </h2>
           </div>
-          <div className="mb-4">
-            <label htmlFor="password" className={labelClasses}>
-              {language === "English" ? "Password" : "رمز"}
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={inputClasses}
-              placeholder={
-                language === "Farsi" ? "رمز عبور شما" : "Your password"
-              }
-            />
+          <div className="w-full">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="email" className={labelClasses}>
+                  {language === "English" ? "Email" : "ایمیل"}
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={inputClasses}
+                    placeholder={
+                      language === "Farsi" ? "آدرس ایمیل شما" : "Your email"
+                    }
+                  />
+                </div>
+              </div>
+              <div className="mb-4 relative">
+                <label htmlFor="password" className={labelClasses}>
+                  {language === "English" ? "Password" : "رمز"}
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    id="password"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className={inputClasses}
+                    placeholder={
+                      language === "Farsi" ? "رمز عبور شما" : "Your password"
+                    }
+                  />
+                  {showPassword ? (
+                    <AiOutlineEyeInvisible
+                      className={`absolute ${language==="English"?"right-4":"left-4"}  top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer`}
+                      size={20}
+                      onClick={() => setShowPassword(false)}
+                    />
+                  ) : (
+                    <AiOutlineEye
+                      className={`absolute ${language==="English"?"right-4":"left-4"}  top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer`}
+                      size={20}
+                      onClick={() => setShowPassword(true)}
+                    />
+                  )}
+                </div>
+
+
+
+              </div>
+              <button type="submit" className={buttonClasses}>
+                {language === "Farsi" ? "ورود" : "Sign In"}
+              </button>
+            </form>
           </div>
-          <button type="submit" className={buttonClasses}>
-            {language === "Farsi" ? "ورود" : "Sign In"}
-          </button>
-        </form>
-        <p className={textClasses}>
-          {language === "Farsi"
-            ? "حساب کاربری ندارید؟"
-            : "Don't have an account?"}{" "}
-          <Link to="/register" className="text-teal-500">
-            {language === "Farsi" ? "ثبت نام" : "Register"}
-          </Link>
-        </p>
+          <div className="w-full">
+            <p className={textClasses}>
+              {language === "Farsi"
+                ? "حساب کاربری ندارید؟"
+                : "Don't have an account?"}{" "}
+              <Link to="/register" className="text-teal-500">
+                {language === "Farsi" ? "ثبت نام" : "Register"}
+              </Link>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

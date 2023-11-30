@@ -1,30 +1,24 @@
-import React from "react";
+
 import { useAppStore } from "../../appStore";
-import { FaSearch } from "react-icons/fa"; // افزودن آیکون جستجو
+import { FaSearch } from "react-icons/fa";
+import GetStartedIcon from "../../assets/GetStartedIcon";
 
 const SearchAndGetStartedSection = () => {
   const { darkMode, language } = useAppStore();
 
-  const containerClasses = `h-[90vh] bg-${darkMode ? "gray-800" : "white"} text-${
-    darkMode ? "white" : "gray-800"
-  } py-16`;
-
-  const headingClasses = "text-4xl font-bold mb-8";
-
-  const searchContainerClasses = "relative flex items-center justify-center mb-12";
-
-  const searchInputClasses = `w-full p-3 ${
-    darkMode ? "bg-gray-700" : "bg-gray-100"
-  } text-gray-800 rounded-lg focus:outline-none focus:ring focus:border-teal-500 placeholder-gray-400`;
-
   return (
-    <section id="search-section" className={containerClasses}>
+    <section
+      id="search-section"
+      className={`h-[90vh] bg-${darkMode ? "gray-600" : "white"} text-${
+        darkMode ? "white" : "gray-800"
+      } pt-16`}
+    >
       <div className="container mx-auto text-center">
-        <h2 className={headingClasses}>
+        <h2 className="text-4xl font-bold mb-8">
           {language === "Farsi" ? "جستجو کنید" : "Search and Get Started"}
         </h2>
 
-        <div className={searchContainerClasses}>
+        <div className="relative flex items-center justify-center mb-12">
           <input
             type="text"
             placeholder={
@@ -32,23 +26,18 @@ const SearchAndGetStartedSection = () => {
                 ? "متن جستجو را وارد کنید"
                 : "Enter search text"
             }
-            className={searchInputClasses}
+            className={`w-full text-center p-3 ${
+              darkMode ? "bg-gray-700" : "bg-gray-100"
+            } text-gray-800 rounded-lg focus:outline-none focus:ring focus:border-teal-500 placeholder-gray-400`}
           />
-          <button
-            className={`absolute right-0 mr-3 focus:outline-none text-gray-600 hover:text-teal-500`}
-          >
-            <FaSearch /> {/* افزودن آیکون جستجو */}
+          <button className="absolute right-0 mr-3 focus:outline-none text-gray-600 hover:text-teal-500">
+            <FaSearch />
           </button>
         </div>
+      </div>
 
-        <p className="text-lg mb-8">
-          {language === "Farsi"
-            ? "شروع به جستجو کنید یا ما را دنبال کنید"
-            : "Start searching or follow us"}
-        </p>
-        <a href="/follow" className="btn btn-primary transition duration-300 transform hover:scale-105">
-          {language === "Farsi" ? "دنبال کنید" : "Follow Us"}
-        </a>
+      <div className="w-[30%] mx-auto">
+        <GetStartedIcon/>
       </div>
     </section>
   );
