@@ -44,7 +44,7 @@ const Hero = () => {
             {language === "Farsi" ? "شروع کنید" : "Get Started"}
           </button>
         </div>
-        <div className=" mx-auto w-[85%]  my-auto col-span-1">
+        <div className=" mx-auto w-full  my-auto col-span-1">
           <HeroSectionIcon />
         </div>
       </div>

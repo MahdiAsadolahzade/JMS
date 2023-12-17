@@ -20,14 +20,17 @@ export type User = {
 
 type UserStore = {
   user: User | null;
+  steps: number;
   signIn: () => void;
   signOut: () => void;
   addJournal: (newJournal: Journal) => void;
   updateUser: (updatedUser: User) => void;
+  nextStep: () => void;
 };
 
 export const useUserStore = create<UserStore>((set) => ({
   user: null,
+  steps: 1,
   signIn: () =>
     set({
       user: {
@@ -41,7 +44,7 @@ export const useUserStore = create<UserStore>((set) => ({
         journals: [],
       },
     }),
-  signOut: () => set({ user: null }),
+  signOut: () => set({ user: null, steps: 1 }),
   addJournal: (newJournal) =>
     set((state) => ({
       user: state.user
@@ -52,4 +55,5 @@ export const useUserStore = create<UserStore>((set) => ({
         : null,
     })),
   updateUser: (updatedUser) => set({ user: updatedUser }),
+  nextStep: () => set((state) => ({ steps: state.steps + 1 })),
 }));

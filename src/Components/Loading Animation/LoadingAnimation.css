@@ -1,35 +1,40 @@
-.animate-shapes {
-    width: 57.6px;
-    height: 57.6px;
-    color: #474bff;
-    background: linear-gradient(currentColor 0 0),
-                linear-gradient(currentColor 0 0),
-                linear-gradient(currentColor 0 0),
-                linear-gradient(currentColor 0 0);
-    background-size: 29.8px 29.8px;
-    background-repeat: no-repeat;
-    animation: shapes-53h9rplg 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+.dots {
+  width: 17.3px;
+  height: 17.3px;
+  position: relative;
+}
+
+.dot {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #009688;
+}
+
+.before {
+  box-shadow: -34.6px 0 #009688;
+  animation: dots-dm1l1clg 0.6s infinite linear;
+}
+
+.after {
+  transform: rotate(0deg) translateX(34.6px);
+  animation: dots-dh1qq5lg 0.6s infinite linear;
+}
+
+@keyframes dots-dm1l1clg {
+  100% {
+    transform: translateX(34.6px);
   }
-  
-  @keyframes shapes-53h9rplg {
-    0% {
-      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-    }
-  
-    33% {
-      background-position: 0 0, 100% 0, 100% 100%, 0 100%;
-      width: 86.4px;
-      height: 86.4px;
-    }
-  
-    66% {
-      background-position: 100% 0, 100% 100%, 0 100%, 0 0;
-      width: 86.4px;
-      height: 86.4px;
-    }
-  
-    100% {
-      background-position: 100% 0, 100% 100%, 0 100%, 0 0;
-    }
+}
+
+@keyframes dots-dh1qq5lg {
+  100% {
+    transform: rotate(-180deg) translateX(34.6px);
   }
-  
+}
+
+/* اضافه کردن حالت تاریک به دات‌ها در حالت تاریک */
+.dark-mode .dot {
+  background: #1f1f1f;
+}

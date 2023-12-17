@@ -4,6 +4,7 @@ import { useAppStore } from "../../appStore";
 import { useUserStore } from "../../userStore";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import LoginIcon from "../../assets/LoginIcon";
+import SlowMovingCode from "../Features/SlowMovingCode";
 
 const Login = () => {
   const { darkMode, language } = useAppStore();
@@ -14,19 +15,25 @@ const Login = () => {
 
   const containerClasses = ` ${
     language === "Farsi" ? "rtl" : "ltr"
-  }  h-screen custom-overflow ${darkMode ? "bg-gray-700" : ""}`;
+  }  h-screen custom-overflow `;
 
-  const labelClasses = `block w-full ${darkMode ? "text-gray-100" : "text-gray-600"}`;
+  const labelClasses = `block w-full ${
+    darkMode ? "text-gray-100" : "text-gray-100"
+  }`;
   const inputClasses = `w-full ${
-    darkMode ? "bg-gray-200" : "bg-teal-50"
+    darkMode ? "bg-gray-200" : "bg-white"
   } p-2 border rounded-lg relative`;
   const buttonClasses =
-    "w-full p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600";
+    `w-full p-2  text-white ${
+      darkMode ? "bg-teal-600" : "bg-gray-700"
+    } rounded-lg ${
+      darkMode ? "hover:bg-teal-500" : "hover:bg-gray-800"
+    }`;
   const titleClasses = `text-2xl w-full ${
-    darkMode ? "text-gray-50" : "text-gray-600"
+    darkMode ? "text-gray-50" : "text-gray-100"
   } font-bold mb-4`;
   const textClasses = `mt-4 w-full text-center w-full ${
-    darkMode ? "text-gray-50" : "text-gray-600"
+    darkMode ? "text-gray-50" : "text-gray-100"
   }`;
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
@@ -37,16 +44,19 @@ const Login = () => {
 
   return (
     <div className={containerClasses}>
+
+
       <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="w-[85%] my-auto hidden md:block">
+        <div className="w-[85%]  my-auto hidden md:block">
           <LoginIcon />
+          <SlowMovingCode/>
         </div>
         <div
           className={` w-full h-screen flex flex-col items-center px-8  justify-center ${
-            darkMode ? "bg-gray-500" : ""
+            darkMode ? "bg-gray-700" : "bg-teal-500"
           }  `}
         >
-          <div className="w-full">
+          <div className="w-full text-white">
             <h2 className={titleClasses}>
               {language === "English" ? "Login" : "ورود"}
             </h2>
@@ -89,21 +99,22 @@ const Login = () => {
                   />
                   {showPassword ? (
                     <AiOutlineEyeInvisible
-                      className={`absolute ${language==="English"?"right-4":"left-4"}  top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer`}
+                      className={`absolute ${
+                        language === "English" ? "right-4" : "left-4"
+                      }  top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer`}
                       size={20}
                       onClick={() => setShowPassword(false)}
                     />
                   ) : (
                     <AiOutlineEye
-                      className={`absolute ${language==="English"?"right-4":"left-4"}  top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer`}
+                      className={`absolute ${
+                        language === "English" ? "right-4" : "left-4"
+                      }  top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer`}
                       size={20}
                       onClick={() => setShowPassword(true)}
                     />
                   )}
                 </div>
-
-
-
               </div>
               <button type="submit" className={buttonClasses}>
                 {language === "Farsi" ? "ورود" : "Sign In"}
@@ -115,7 +126,7 @@ const Login = () => {
               {language === "Farsi"
                 ? "حساب کاربری ندارید؟"
                 : "Don't have an account?"}{" "}
-              <Link to="/register" className="text-teal-500">
+              <Link to="/register" className={`${darkMode?"text-teal-500":"text-gray-600"} `}>
                 {language === "Farsi" ? "ثبت نام" : "Register"}
               </Link>
             </p>

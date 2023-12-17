@@ -38,25 +38,21 @@ const LanguageSelect: React.FC = () => {
           } text-white border  rounded z-10`}
         >
           <div
-            className={`flex items-center px-2 py-1 ${
+            className={`flex items-center justify-center px-2 py-1 ${
               darkMode ? "hover:bg-gray-600" : "hover:bg-[#6CC0B9]"
             }  cursor-pointer`}
             onClick={() => handleLanguageChange("English")}
           >
-            <span role="img" aria-label="USA Flag" className="mr-1">
-              🇺🇸
-            </span>
+            
             English
           </div>
           <div
-            className={`flex items-center px-2 py-1 ${
+            className={`flex items-center justify-center px-2 py-1 ${
               darkMode ? "hover:bg-gray-600" : "hover:bg-[#6CC0B9]"
             } cursor-pointer`}
             onClick={() => handleLanguageChange("Farsi")}
           >
-            <span role="img" aria-label="Iran Flag" className="mr-1">
-              🇮🇷
-            </span>
+           
             فارسی
           </div>
         </div>

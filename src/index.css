@@ -4,7 +4,15 @@
 
 .rtl {
     direction: rtl;
+    font-family: B-Nazanin
 }
 
 
+.ltr {
+    font-family: 'Times New Roman', Times, serif;
+}
+@font-face {
+    font-family: 'B-Nazanin';
+    src: local('B-Nazanin'), url(./fonts/B-Nazanin.ttf) format('truetype');
+  }
 
