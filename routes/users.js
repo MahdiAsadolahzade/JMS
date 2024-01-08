@@ -1,7 +1,11 @@
-import Express from 'express'
-import { getUser } from '../controllers/user.js';
+import Express from "express";
+import { getUserById, updateUser } from "../controllers/user.js";
+import multer from "multer";
 
-const router = Express.Router()
+const upload = multer();
+const router = Express.Router();
 
-router.get('/find:userId',getUser)
+router.get("/find", getUserById);
+
+router.put("/update", upload.single("Picture"), updateUser);
 export default router;

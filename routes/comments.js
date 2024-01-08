@@ -1,7 +1,13 @@
-import Express from 'express'
-import { } from '../controllers/comment.js';
+// routes/comments.js
+import Express from 'express';
+import { getCommentsByJournalId, addComment } from '../controllers/comment.js';
 
-const router = Express.Router()
+const router = Express.Router();
 
-router.get('',)
+// Get comments by Journal ID
+router.get('/:journalId', getCommentsByJournalId);
+
+// Add a new comment
+router.post('/add', addComment);
+
 export default router;

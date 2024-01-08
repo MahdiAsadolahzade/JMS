@@ -1,7 +1,13 @@
-import Express from 'express'
-import { } from '../controllers/like.js';
+// routes/likes.js
+import Express from 'express';
+import { getLikesByJournalId, addLike } from '../controllers/like.js';
 
-const router = Express.Router()
+const router = Express.Router();
 
-router.get('',)
+// Get likes by Journal ID
+router.get('/:journalId', getLikesByJournalId);
+
+// Add a new like
+router.post('/add', addLike);
+
 export default router;
