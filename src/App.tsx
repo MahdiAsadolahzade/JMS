@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Outlet,
-  Navigate,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
@@ -34,7 +33,6 @@ const App: React.FC = () => {
   const ProtectedRoute = ({ children }: any) => {
     const { user } = useUserStore();
     if (!user) {
-      return <Navigate to={"/login"} />;
     }
     return children;
   };
@@ -53,11 +51,11 @@ const App: React.FC = () => {
           element: <Home />,
         },
         {
-          path: "/dashboard/:id",
+          path: "/dashboard",
           element: <Dashboard />,
         },
         {
-          path: "/dashboard/:id/createjournal/:id",
+          path: "/dashboard/createjournal",
           element: <CreateJournal />,
         },
         {

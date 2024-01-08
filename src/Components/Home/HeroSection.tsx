@@ -1,7 +1,6 @@
 import { useAppStore } from "../../appStore";
-import JMSLogo from "../../../public/Logo/JMS.svg";
+import JMSLogo from "../../SVG/Logo/JMS.svg"
 import HeroSectionIcon from "../../assets/HeroSectionIcon";
-
 
 const Hero = () => {
   const { darkMode, language } = useAppStore();

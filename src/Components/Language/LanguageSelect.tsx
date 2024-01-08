@@ -1,8 +1,8 @@
 import React from "react";
 import { useAppStore } from "../../appStore";
 import { FaGlobe, FaChevronDown } from "react-icons/fa";
-import ir from "../../../public/Country/ir.svg";
-import us from "../../../public/Country/us.svg";
+import ir from "../../SVG/Country/ir.svg"
+import us from "../../SVG/Country/us.svg";
 
 const LanguageSelect: React.FC = () => {
   const { language, setLanguage, darkMode } = useAppStore();

@@ -1,135 +1,74 @@
-import React, { useState } from "react";
-import { useUserStore, User } from "../../userStore";
+import { useState } from "react";
+import useUpdateUser from "../../hooks/useUpdateUser";
+import EditProfileForm from "../../Schemas/EditProfileForm";
 import { useAppStore } from "../../appStore";
+import { User ,useUserStore} from "../../userStore";
 
-interface UserProfileEditProps {
-  user: User;
-}
+import "../Scrollbar.css";
 
-const UserProfileEdit: React.FC<UserProfileEditProps> = ({ user }) => {
-  const { updateUser } = useUserStore();
-  const { darkMode, language } = useAppStore();
-  const [editMode, setEditMode] = useState(false);
-  const [editedName, setEditedName] = useState(user?.displayName || "");
-  const [editedPhoto, setEditedPhoto] = useState(user?.profilePicture || "");
-  const [editedMobile, setEditedMobile] = useState(user?.mobile || "");
-  const [editedAddress, setEditedAddress] = useState(user?.address || "");
-
-  const handleEditProfile = () => {
-    setEditedName(user?.displayName || "");
-    setEditedPhoto(user?.profilePicture || "");
-    setEditedMobile(user?.mobile || "");
-    setEditedAddress(user?.address || "");
-    setEditMode(true);
-  };
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedName(e.target.value);
-  };
-
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setEditedPhoto(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedMobile(e.target.value);
-  };
-
-  const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditedAddress(e.target.value);
-  };
-
-  const handleSaveChanges = () => {
-    const updatedUser: User = {
-      ...user!,
-      displayName: editedName,
-      profilePicture: editedPhoto,
-      mobile: editedMobile,
-      address: editedAddress,
-    };
-    updateUser(updatedUser);
-    setEditMode(false);
-  };
+const CustomDialog = ({ isOpen, onClose, children }: any) => {
+  if (!isOpen) return null;
 
   return (
-    <>
-      {editMode ? (
-        <div className={`h-[40vh] custom-overflow space-y-10 `}>
-          <label className="block mb-4">
-            {language === "Farsi" ? "نام:" : "Name:"}
-            <input
-              type="text"
-              value={editedName}
-              onChange={handleNameChange}
-              className={`mt-1 p-2 border border-gray-300 rounded w-full  ${
-                darkMode ? "bg-gray-800" : ""
-              } `}
-            />
-          </label>
-          <label className="block mb-4">
-            {language === "Farsi" ? "تصویر:" : "Photo:"}
-            <input
-              type="file"
-              onChange={handlePhotoChange}
-              className={`mt-1 p-2 border  border-gray-300 rounded w-full ${
-                darkMode ? "bg-gray-800" : ""
-              } `}
-            />
-          </label>
-          <label className="block mb-4">
-            {language === "Farsi" ? "شماره همراه:" : "Phone Number:"}
-            <input
-              type="text"
-              value={editedMobile}
-              onChange={handleMobileChange}
-              className={`mt-1 p-2 border border-gray-300 rounded w-full ${
-                darkMode ? "bg-gray-800" : ""
-              } `}
-            />
-          </label>
-          <label className="block mb-4">
-            {language === "Farsi" ? "آدرس:" : "Address:"}
-            <input
-              type="text"
-              value={editedAddress}
-              onChange={handleAddressChange}
-              className={`mt-1 p-2 border border-gray-300 rounded w-full ${
-                darkMode ? "bg-gray-800" : ""
-              } `}
-            />
-          </label>
-          <div className="flex  justify-center">
-            <button
-              onClick={handleSaveChanges}
-              className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded mx-4"
-            >
-              {language === "Farsi" ? "ذخیره" : "Save"}
-            </button>
-            <button
-              onClick={() => setEditMode(false)}
-              className="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded"
-            >
-              {language === "Farsi" ? "لغو" : "Cancel"}
-            </button>
-          </div>
-        </div>
-      ) : (
-        <button
-          onClick={handleEditProfile}
-          className="bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded"
-        >
-          {language === "Farsi" ? "ویرایش پروفایل" : "Edit Profile"}
-        </button>
-      )}
-    </>
+    <div className="fixed inset-0 z-50 flex items-center justify-center ">
+      <div
+        className="fixed inset-0 bg-black opacity-30"
+        onClick={onClose}
+      ></div>
+      <div className="bg-white p-6 rounded-lg z-50 max-w-md w-full">
+        {children}
+      </div>
+    </div>
   );
 };
 
-export default UserProfileEdit;
+const EditProfile = () => {
+  const { darkMode, language } = useAppStore();
+  const editProfileData = useUpdateUser();
+  const [isEditing, setIsEditing] = useState(false);
+  const {updateUser} =useUserStore()
+
+  const handleSubmit = async (data) => {
+    try {
+      await editProfileData.mutate(data);
+      updateUser(data);
+      setIsEditing(false);
+    } catch (error) {}
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
+
+  return (
+    <div>
+      <button
+        className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 focus:outline-none"
+        onClick={() => setIsEditing(true)}
+      >
+        {language === "English" ? "Edit Profile" : "ویرایش پروفایل"}
+      </button>
+
+      <CustomDialog isOpen={isEditing} onClose={handleCancel}>
+        <div
+          className={`${
+            darkMode ? "bg-gray-700 text-gray-100" : "bg-gray-100 text-gray-800"
+          } max-h-[50vh] custom-overflow w-full mx-auto rounded-lg`}
+        >
+          <h2
+            className={` ${
+              darkMode ? "text-gray-100" : "text-gray-800"
+            } text-2xl p-4`}
+          >
+            {language === "English" ? "Edit Profile" : "ویرایش پروفایل"}
+          </h2>
+          <div className="p-3">
+            <EditProfileForm onSubmit={handleSubmit} onCancel={handleCancel} />
+          </div>
+        </div>
+      </CustomDialog>
+    </div>
+  );
+};
+
+export default EditProfile;

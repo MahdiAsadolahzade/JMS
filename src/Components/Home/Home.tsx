@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useAppStore } from "../../appStore";
 import LoadingAnimation from "../Loading Animation/LoadingAnimation";
 import Hero from "./HeroSection";

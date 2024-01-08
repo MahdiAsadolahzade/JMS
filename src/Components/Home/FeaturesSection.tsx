@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useAppStore } from "../../appStore";
 import FeatureIcon from "../../assets/FeatureIcon";
 

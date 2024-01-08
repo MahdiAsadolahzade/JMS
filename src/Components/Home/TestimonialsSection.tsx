@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useAppStore } from "../../appStore";
 import TestimonialIcon from "../../assets/TestinomialIcon";
 

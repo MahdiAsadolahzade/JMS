@@ -1,5 +1,5 @@
 import { useAppStore } from "../../appStore";
-import img from "../../../public/Images/img.jpg";
+import img from "../../Images/img.jpg"
 
 const AboutSection2 = () => {
   const { darkMode, language } = useAppStore();

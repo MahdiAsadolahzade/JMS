@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div
-      className={`custom-overflow h-[90vh] ${
+      className={`custom-overflow h-[90vh] px-5 ${
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
     >

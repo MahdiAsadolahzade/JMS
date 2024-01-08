@@ -13,16 +13,18 @@ import ContactBar from "./ContactBar";
 import DashboardBar from "./DashboardBar";
 import SignoutBar from "./SignoutBar";
 import LoginBar from "./LoginBar";
+import { useAuth } from "../../hooks/useAuth";
 import "./NavBar.css";
 
 const Navbar: React.FC = () => {
-  const { user, signOut ,signIn } = useUserStore();
+  const { user, signOut } = useUserStore();
   const { darkMode } = useAppStore();
   const location = useLocation();
-  const params = useParams<{ id: string }>();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const { logout} =useAuth();
+
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -31,6 +33,7 @@ const Navbar: React.FC = () => {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
 
   const toggleSearch = () => {
     setSearchOpen(!searchOpen);
@@ -149,10 +152,10 @@ const Navbar: React.FC = () => {
             <>
               <li>
                 <NavLink
-                  to={`/dashboard/${user.id}`}
+                  to={`/dashboard`}
                   onClick={closeMenu}
                   className={`${
-                    location.pathname === `/dashboard/${user.id}`
+                    location.pathname === `/dashboard`
                       ? `${
                           darkMode ? "nav-link-active-dark" : "nav-link-active"
                         }`
@@ -165,7 +168,8 @@ const Navbar: React.FC = () => {
               <li>
                 <button
                   onClick={() => {
-                    signOut();
+                    
+                    logout();
                     closeMenu();
                   }}
                   className={`hover:underline  hover:animate-pulse ${
