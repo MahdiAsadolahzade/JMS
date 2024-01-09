@@ -33,8 +33,8 @@ export const addJournal = (req, res) => {
     const userId = userInfo.id;
 
     const { Name, Description, Year } = req.body;
-    const Picture = req.files['Picture'][0].buffer; // Get Picture buffer
-    const PDF = req.files['PDF'][0].buffer; // Get PDF buffer
+    const Picture = req.files['Picture'][0].buffer; 
+    const PDF = req.files['PDF'][0].buffer; 
 
     const q2 = "INSERT INTO journal (Name, Description, Picture, PDF, Year, Writers) VALUES (?, ?, ?, ?, ?, ?)";
     const values = [Name, Description, Picture, PDF, Year, userId];
@@ -58,10 +58,14 @@ export const updateJournal = (req, res) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const userId = userInfo.id;
+    
     const journalId = req.params.id;
+    
     const { Name, Description, Year } = req.body;
-    const Picture = req.files['Picture'][0].buffer; // Get Picture buffer
-    const PDF = req.files['PDF'][0].buffer; // Get PDF buffer
+    const file = req.file;
+   
+    const Picture = req.files['Picture'] ? req.files['Picture'][0].buffer : null;
+    const PDF = req.files['PDF'] ? req.files['PDF'][0].buffer : null; 
 
     const q3 = "UPDATE journal SET Name=?, Description=?, Picture=?, PDF=?, Year=? WHERE ID=? AND Writers=?";
     const values = [Name, Description, Picture, PDF, Year, journalId, userId];
@@ -75,3 +79,34 @@ export const updateJournal = (req, res) => {
     });
   });
 };
+
+
+// controllers/journal.js
+// ...
+
+export const deleteJournal = (req, res) => {
+  const token = req.cookies.accessToken;
+
+  if (!token) return res.status(401).json("Not Logged In!");
+
+  jwt.verify(token, "secretkey", (err, userInfo) => {
+    if (err) return res.status(403).json("Token is not valid!");
+
+    const userId = userInfo.id;
+    
+    const journalId = req.params.id;
+
+    const q4 = "DELETE FROM journal WHERE ID=? AND Writers=?";
+    const values = [journalId, userId];
+
+    db.query(q4, values, (err, data) => {
+      if (err) {
+        return res.status(500).json(err);
+      }
+
+      res.status(200).json("Journal deleted successfully");
+    });
+  });
+};
+
+// ...

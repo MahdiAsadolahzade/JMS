@@ -1,7 +1,7 @@
 // routes/journal.js
 import Express from 'express';
 import multer from 'multer';
-import { getJournals, addJournal, updateJournal } from '../controllers/journal.js';
+import { getJournals, addJournal, updateJournal ,deleteJournal} from '../controllers/journal.js';
 
 const router = Express.Router();
 
@@ -15,6 +15,9 @@ router.get('/find', getJournals);
 router.post('/addjournal', upload.fields([{ name: 'Picture', maxCount: 1 }, { name: 'PDF', maxCount: 1 }]), addJournal);
 
 // Endpoint to update a journal
-router.post('/update/:id', upload.fields([{ name: 'Picture', maxCount: 1 }, { name: 'PDF', maxCount: 1 }]), updateJournal);
+router.put('/update/:id', upload.fields([{ name: 'Picture', maxCount: 1 }, { name: 'PDF', maxCount: 1 }]), updateJournal);
+
+router.delete('/delete/:id', deleteJournal);
+
 
 export default router;
