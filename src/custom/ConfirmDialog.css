@@ -1,0 +1,41 @@
+/* ConfirmDialog.css */
+.confirm-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .confirm-dialog-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+  }
+  
+  .confirm-dialog-buttons {
+    margin-top: 20px;
+  }
+  
+  .confirm-dialog-buttons button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .confirm-dialog-buttons button:first-child {
+    background: #ddd;
+  }
+  
+  .confirm-dialog-buttons button:last-child {
+    background: #e64a19;
+    color: white;
+  }
+  

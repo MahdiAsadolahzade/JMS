@@ -1,37 +1,22 @@
-// CustomNotification.tsx
-import React from "react";
-import { ToastContainer, toast, ToastOptions } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import React, { useState, useEffect } from 'react';
+import './Notification.css'; // فایل استایل برای سفارشی‌سازی ظاهر
 
-interface CustomNotificationProps {
-  type: "success" | "error" | "info";
-  message: string;
-  options?: ToastOptions;
-}
+const Notification = ({ type, message }) => {
+  const [showNotification, setShowNotification] = useState(true);
 
-const CustomNotification: React.FC<CustomNotificationProps> = ({ type, message, options }) => {
-  const showToast = () => {
-    switch (type) {
-      case "success":
-        toast.success(message, { ...options, autoClose: 3000 }); // 3000 milliseconds
-        break;
-      case "error":
-        toast.error(message, { ...options, autoClose: 3000 });
-        break;
-      case "info":
-        toast.info(message, { ...options, autoClose: 3000 });
-        break;
-      default:
-        break;
-    }
-  };
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowNotification(false);
+    }, 5000); // مدت زمان نمایش نوتیفیکیشن به میلی‌ثانیه
 
-  return (
-    <div>
-      <button onClick={showToast}>Show Notification</button>
-      <ToastContainer />
+    return () => clearTimeout(timeout);
+  }, []);
+
+  return showNotification ? (
+    <div className={`notification ${type}`}>
+      <p>{message}</p>
     </div>
-  );
+  ) : null;
 };
 
-export default CustomNotification;
+export default Notification;

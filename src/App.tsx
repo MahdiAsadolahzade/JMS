@@ -11,7 +11,8 @@ import Contact from "./Components/ContactPage/Contact";
 import Dashboard from "./Components/DashboardPage/Dashboard";
 import Login from "./Components/AuthLayout/login";
 import Register from "./Components/AuthLayout/Register";
-import CreateJournal from "./Components/CreateJournalPage/CreateJournal";
+import CreateJournal from "./Components/Journal/CreateJournal";
+import ShowJournal from "./Components/Journal/ShowJournal";
 import { useAppStore } from "./appStore";
 import { useUserStore } from "./userStore";
 
@@ -57,6 +58,10 @@ const App: React.FC = () => {
         {
           path: "/dashboard/createjournal",
           element: <CreateJournal />,
+        },
+        {
+          path: "/journal/:id",
+          element: <ShowJournal />,
         },
         {
           path: "/about",

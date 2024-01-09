@@ -43,7 +43,7 @@ const Home = () => {
 
   return (
     <div
-      className={`custom-overflow  h-[90vh] ${
+      className={`custom-overflow px-5 h-[90vh] ${
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
       onScroll={handleScroll}

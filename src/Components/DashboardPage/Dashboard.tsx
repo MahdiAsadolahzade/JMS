@@ -1,7 +1,7 @@
 import React from "react";
-import JournalList from "./JournalList";
+import JournalList from "../Journal/JournalList";
 import UserProfile from "./UserProfile";
-import CreateJournalForm from "./CreateJournalForm";
+import CreateJournalForm from "../Journal/CreateJournalForm";
 import { useAppStore } from "../../appStore";
 import DashboardIcon from "../../assets/DashboardIcon";
 

@@ -1,9 +1,8 @@
 import React from "react";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useAppStore } from "../../appStore";
 import { useUserStore } from "../../userStore";
 import { BsJournalPlus } from "react-icons/bs";
-
 
 const Dashboard: React.FC = () => {
   const { user } = useUserStore();
@@ -27,13 +26,21 @@ const Dashboard: React.FC = () => {
             : "Create A New Journal"}
         </div>
       </h2>
-      <NavLink to={`/dashboard/createjournal`}>
-        <div className="flex justify-center items-center">
-          <button className="bg-teal-500  hover:bg-teal-700 text-white font-bold py-3 px-5 rounded">
-            {language === "Farsi" ? "از این جا شروع کنید" : "Start From Here"}
-          </button>
-        </div>
-      </NavLink>
+      {user ? (
+        <NavLink to={`/dashboard/createjournal`}>
+          <div className="flex justify-center items-center">
+            <button className="bg-teal-500  hover:bg-teal-700 text-white font-bold py-3 px-5 rounded">
+              {language === "Farsi" ? "از این جا شروع کنید" : "Start From Here"}
+            </button>
+          </div>
+        </NavLink>
+      ) : (
+        <p>
+          {language === "Farsi"
+            ? "لطفاً وارد شوید تا  ژورنال خود را مشاهده کنید."
+            : "Please log in to view your journals."}
+        </p>
+      )}
     </div>
   );
 };

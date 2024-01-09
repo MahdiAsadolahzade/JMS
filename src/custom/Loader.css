@@ -1,0 +1,60 @@
+/* Loader.css */
+
+.spinner {
+    width: 70.4px;
+    height: 70.4px;
+    animation: spinner-y0fdc1 2.4s infinite ease;
+    transform-style: preserve-3d;
+    margin: auto;
+ }
+ 
+ .spinner-item {
+    background-color: rgba(0,150,136,0.2);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border: 3.5px solid #009688;
+ }
+ 
+ .spinner-item:nth-child(1) {
+    transform: translateZ(-35.2px) rotateY(180deg);
+ }
+ 
+ .spinner-item:nth-child(2) {
+    transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right;
+ }
+ 
+ .spinner-item:nth-child(3) {
+    transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left;
+ }
+ 
+ .spinner-item:nth-child(4) {
+    transform: rotateX(90deg) translateY(-50%);
+    transform-origin: top center;
+ }
+ 
+ .spinner-item:nth-child(5) {
+    transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center;
+ }
+ 
+ .spinner-item:nth-child(6) {
+    transform: translateZ(35.2px);
+ }
+ 
+ @keyframes spinner-y0fdc1 {
+    0% {
+       transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+    }
+ 
+    50% {
+       transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+    }
+ 
+    100% {
+       transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+    }
+ }
+ 

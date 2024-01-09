@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, useLocation, useParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useUserStore } from "../../userStore";
 import { useAppStore } from "../../appStore";
 import Theme from "../Theme/Theme";
 import LanguageSelect from "../Language/LanguageSelect";
-import SearchBar from "./SearchBar";
-import { FaSearch } from "react-icons/fa";
+
 import JMSBar from "./JMSBar";
 import HomeBar from "./HomeBar";
 import AboutBar from "./AboutBar";
@@ -14,6 +13,7 @@ import DashboardBar from "./DashboardBar";
 import SignoutBar from "./SignoutBar";
 import LoginBar from "./LoginBar";
 import { useAuth } from "../../hooks/useAuth";
+
 import "./NavBar.css";
 
 const Navbar: React.FC = () => {
@@ -21,8 +21,6 @@ const Navbar: React.FC = () => {
   const { darkMode } = useAppStore();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
   const { logout} =useAuth();
 
 
@@ -35,21 +33,16 @@ const Navbar: React.FC = () => {
   };
 
 
-  const toggleSearch = () => {
-    setSearchOpen(!searchOpen);
-  };
 
-  const handleSearchChange = (newSearchTerm: string) => {
-    setSearchTerm(newSearchTerm);
-  };
 
+  
 
   
   return (
     <nav
       className={`${
         darkMode ? "bg-gray-900" : "bg-teal-500 "
-      } p-4 h-[10vh] text-white relative`}
+      } p-2 h-[10vh] text-white relative`}
     >
       <div className="container mx-auto flex justify-between items-center">
         <NavLink
@@ -77,37 +70,14 @@ const Navbar: React.FC = () => {
             ></div>
           </div>
         </div>
-        <div className="md:hidden cursor-pointer" onClick={toggleSearch}>
-          <div className="w-10 h-10">
-            <div className="relative">
-              <div className={`absolute top-2 left-2 `}>
-                <FaSearch />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="hidden md:flex items-center space-x-4">
-          <div className="relative">
-            <SearchBar
-              searchTerm={searchTerm}
-              onSearchChange={handleSearchChange}
-              darkMode={darkMode}
-            ></SearchBar>
-            <div
-              className={`absolute top-3 left-3 ${
-                darkMode ? "" : "text-gray-600"
-              }`}
-            >
-              <FaSearch></FaSearch>
-            </div>
-          </div>
-        </div>
+     
+      
         <ul
           className={`md:flex md:max-h-[5vh] flex-col md:flex-row space-y-4 md:space-x-8 ${
             menuOpen ? "flex justify-center items-center w-full " : "hidden"
           } md:space-y-0 absolute top-full left-0 mt-2 md:relative ${
             darkMode ? "bg-gray-900" : "bg-teal-500"
-          } z-10`}
+          } `}
         >
           <li>
             <NavLink
@@ -172,8 +142,8 @@ const Navbar: React.FC = () => {
                     logout();
                     closeMenu();
                   }}
-                  className={`hover:underline  hover:animate-pulse ${
-                    darkMode ? "text-rose-800" : "text-rose-800"
+                  className={` hover:animate-pulse font-bold ${
+                    darkMode ? "text-orange-600" : "text-pink-700"
                   }`}
                 >
                   <SignoutBar></SignoutBar>
@@ -200,19 +170,9 @@ const Navbar: React.FC = () => {
             </>
           )}
         </ul>
-        {searchOpen && (
-          <div className="md:hidden ">
-            <SearchBar
-              searchTerm={searchTerm}
-              onSearchChange={handleSearchChange}
-              darkMode={darkMode}
-            />
-          </div>
-        )}
+       
         <div
-          className={`flex items-center space-x-3 ${
-            searchOpen ? "hidden" : ""
-          }`}
+          className={`flex items-center space-x-3`}
         >
           <LanguageSelect />
           <Theme />

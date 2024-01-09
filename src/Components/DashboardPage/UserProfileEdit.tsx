@@ -2,8 +2,9 @@ import { useState } from "react";
 import useUpdateUser from "../../hooks/useUpdateUser";
 import EditProfileForm from "../../Schemas/EditProfileForm";
 import { useAppStore } from "../../appStore";
-import { User ,useUserStore} from "../../userStore";
-
+import {useUserStore} from "../../userStore";
+import Notification from "../../custom/Notification";
+import {useNavigate } from "react-router-dom";
 import "../Scrollbar.css";
 
 const CustomDialog = ({ isOpen, onClose, children }: any) => {
@@ -27,12 +28,14 @@ const EditProfile = () => {
   const editProfileData = useUpdateUser();
   const [isEditing, setIsEditing] = useState(false);
   const {updateUser} =useUserStore()
+  const navigate = useNavigate();
 
   const handleSubmit = async (data) => {
     try {
       await editProfileData.mutate(data);
       updateUser(data);
       setIsEditing(false);
+      navigate("/dashboard")
     } catch (error) {}
   };
 
@@ -42,6 +45,13 @@ const EditProfile = () => {
 
   return (
     <div>
+         {editProfileData.isError && (
+         <Notification type="error" message={`${language === "Farsi" ? "مشکلی رخ داد دوباره بررسی کنید" : "Something went wrong, please check again"}`} />
+          )}
+
+          {editProfileData.isSuccess && (
+            <Notification type="success" message={`${language === "Farsi" ? "پروفایل با موفقیت ویرایش شد" : "Profile updated successfully"}`} />
+          )}
       <button
         className="bg-teal-500 text-white px-4 py-2 rounded-full hover:bg-teal-600 focus:outline-none"
         onClick={() => setIsEditing(true)}

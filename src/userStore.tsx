@@ -3,9 +3,12 @@ import create from 'zustand';
 import img from '../public/Images/img.jpg';
 
 type Journal = {
-  id: number;
-  title: string;
-  content: string;
+  ID: number;
+  Name: string;
+  Description: string;
+  Year:string;
+  Picture:File;
+  PDF:File;
 };
 
 export type User = {

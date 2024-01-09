@@ -5,6 +5,8 @@ import { useRegister } from "../../hooks/useRegister";
 import RegisterIcon from "../../assets/RegisterIcon";
 import SlowMovingCode from "../Features/SlowMovingCode";
 import RegisterForm from "../../Schemas/RegisterForm";
+import Loader from "../../custom/Loader";
+import Notification from "../../custom/Notification";
 
 const Register = () => {
   const { darkMode, language } = useAppStore();
@@ -27,10 +29,14 @@ const Register = () => {
     registerData.mutate(data, {
       onSuccess: () => {
      
-        navigate("/login");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000);
       },
       onError: (e) => {
-        console.log(e);
+        setTimeout(() => {
+          console.log(e);
+        }, 3000);
       },
     });
   };
@@ -49,7 +55,7 @@ const Register = () => {
             </h2>
           </div>
           <div className="w-full">
-            {/* استفاده از کامپوننت RegisterForm */}
+           
             <RegisterForm onSubmit={handleSubmit} />
           </div>
           <div className="w-full">
@@ -65,11 +71,25 @@ const Register = () => {
               </Link>
             </p>
           </div>
+          {registerData.isError && (
+         <Notification type="error" message={`${language === "Farsi" ? "ثبت نام با مشکل مواجه شد." : "Registration failed."}`} />
+          )}
+
+          {registerData.isSuccess && (
+            <Notification type="success" message={`${language === "Farsi" ? "ثبت نام با موفقیت انجام شد." : "Registration successful."}`} />
+          )}
         </div>
 
         <div className="w-[85%] my-auto hidden md:block">
-          <RegisterIcon />
-          <SlowMovingCode />
+          
+          {registerData.isSuccess ? (
+            <Loader />
+          ) : (
+            <>
+              <RegisterIcon />
+              <SlowMovingCode />
+            </>
+          )}
         </div>
       </div>
     </div>

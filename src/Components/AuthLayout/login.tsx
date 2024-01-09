@@ -6,6 +6,8 @@ import SlowMovingCode from "../Features/SlowMovingCode";
 import LoginForm from "../../Schemas/loginForm";
 import { useLogin } from "../../hooks/useLogin";
 import { User, useUserStore } from "../../userStore";
+import Loader from "../../custom/Loader";
+import Notification from "../../custom/Notification";
 
 const Login = () => {
   const { darkMode, language } = useAppStore();
@@ -25,7 +27,6 @@ const Login = () => {
   }`;
 
   const handleSubmit = (data: any) => {
-    console.log(data);
     loginData.mutate(data, {
       onSuccess: () => {
         const user: User = {
@@ -42,10 +43,14 @@ const Login = () => {
         };
         localStorage.setItem("user", JSON.stringify(data));
         setUser(user);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
       },
       onError: (e) => {
-        console.log(e);
+        setTimeout(() => {
+          console.log(e);
+        }, 3000);
       },
     });
   };
@@ -54,14 +59,21 @@ const Login = () => {
     <div className={containerClasses}>
       <div className="grid grid-cols-1 md:grid-cols-2">
         <div className="w-[85%]  my-auto hidden md:block">
-          <LoginIcon />
-          <SlowMovingCode />
+          {loginData.isSuccess ? (
+            <Loader />
+          ) : (
+            <>
+              <LoginIcon />
+              <SlowMovingCode />
+            </>
+          )}
         </div>
         <div
           className={` w-full h-screen flex flex-col items-center px-8  justify-center ${
             darkMode ? "bg-gray-700" : "bg-teal-500"
           }  `}
         >
+          
           <div className="w-full text-white">
             <h2 className={titleClasses}>
               {language === "English" ? "Login" : "ورود"}
@@ -83,6 +95,14 @@ const Login = () => {
               </Link>
             </p>
           </div>
+          {loginData.isError && (
+         <Notification type="error" message={`${language === "Farsi" ? "نام کاربری یا رمز عبور اشتباه است." : "Invalid username or password."}`} />
+          )}
+
+          {loginData.isSuccess && (
+            <Notification type="success" message={`${language === "Farsi" ? "ورود با موفقیت انجام شد." : "Login successful."}`} />
+          )}
+
         </div>
       </div>
     </div>

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppStore } from "../../appStore";
-import ContactSection1 from "./ContactSection1";
-import ContactSection2 from "./ContactSection2.tsx";
-import ContactSection3 from "./ContactSection3.tsx";
+import ContactSection1 from "./ContactSection.tsx";
+import ContactSection3 from "./FAQSection.tsx";
 import "./Contact.css";
 import LoadingAnimation from "../Loading Animation/LoadingAnimation.tsx";
 
@@ -21,7 +20,7 @@ const Contact = () => {
 
   return (
     <div
-      className={`custom-overflow h-[90vh] ${
+      className={`custom-overflow h-[90vh] px-5 ${
         darkMode ? "dark bg-gray-600 text-gray-100" : "bg-white text-gray-900"
       }`}
     >
@@ -33,7 +32,6 @@ const Contact = () => {
       ) : (
         <>
           <ContactSection1 />
-          <ContactSection2 />
           <ContactSection3 />
           
         </>

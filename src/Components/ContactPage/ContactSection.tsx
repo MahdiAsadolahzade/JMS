@@ -2,7 +2,7 @@ import { useAppStore } from "../../appStore";
 import { MdEmail } from "react-icons/md";
 import { BiSolidPhoneCall } from "react-icons/bi";
 import ContactIcon from "../../assets/ContactIcon";
-const ContactSection1 = () => {
+const ContactSection = () => {
   const { darkMode, language } = useAppStore();
 
   const convertToPersianNumbers = (input: string): string => {
@@ -105,4 +105,4 @@ const ContactSection1 = () => {
   );
 };
 
-export default ContactSection1;
+export default ContactSection;
