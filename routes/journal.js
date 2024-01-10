@@ -18,6 +18,4 @@ router.post('/addjournal', upload.fields([{ name: 'Picture', maxCount: 1 }, { na
 router.put('/update/:id', upload.fields([{ name: 'Picture', maxCount: 1 }, { name: 'PDF', maxCount: 1 }]), updateJournal);
 
 router.delete('/delete/:id', deleteJournal);
-
-
 export default router;
