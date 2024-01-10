@@ -23,7 +23,7 @@ const editProfileSchema = z.object({
     .string()
     .min(3, { message: "Name must be at least 3 characters" })
     .max(50, { message: "Name must be at most 50 characters" }),
-  Number: z.string(),
+  Number: z.string().min(9).max(15),
   Address: z.string(),
   Education: z.string(),
   Picture:z.any()
@@ -115,7 +115,7 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({
               {...register("Number")}
               className={inputClasses}
               placeholder={
-                language === "Farsi" ? "تلفن همراه شما" : "Your Number number"
+                language === "Farsi" ? "تلفن همراه شما" : "Your Phone number"
               }
             />
           </div>

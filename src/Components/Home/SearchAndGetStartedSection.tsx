@@ -52,7 +52,7 @@ const SearchAndGetStartedSection = () => {
               darkMode ? "bg-gray-700" : "bg-gray-100"
             } text-gray-800 rounded-lg focus:outline-none focus:ring focus:border-teal-500 placeholder-gray-400`}
             value={searchText}
-            onChange={(e) => setSearchText(e.target.value)} // اضافه شده
+            onChange={(e) => setSearchText(e.target.value)} 
           />
           <button
             className="absolute right-0 mr-3 focus:outline-none text-gray-600 hover:text-teal-500"
@@ -65,7 +65,7 @@ const SearchAndGetStartedSection = () => {
 
       <div className={`container max-h-[25vh] custom-overflow mx-auto`} dir="ltr">
         {searchJournalsQuery.isLoading && (
-          <div className="flex flex-col justify-center items-center mt-40">
+          <div className="flex flex-col justify-center items-center my-10">
             <Loader />
           </div>
         )}
